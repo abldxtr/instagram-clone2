@@ -16,8 +16,8 @@ export default async function DashboardLayout({
   return (
     <div className="flex h-screen relative flex-col md:flex-row md:overflow-auto">
       <BottomNav image={image} />
-      <NavLeft image={image} />
-      <ProfileUiShow />
+      <NavLeft profile={session} />
+      <ProfileUiShow profile={session} />
 
       {/* dashboard page */}
       {/* <div className="w-20 flex-none lg:w-64 md:border-r">

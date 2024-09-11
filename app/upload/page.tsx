@@ -3,7 +3,8 @@ import UploadImg from "@/components/upload/uploadImg";
 
 export default function Upload() {
   return (
-    <UploadImg />
+    <div></div>
+    // <UploadImg />
     // <UploadForm />
   );
 }

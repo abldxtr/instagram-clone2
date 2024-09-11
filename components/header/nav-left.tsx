@@ -5,6 +5,7 @@ import { Icons } from "../Icons";
 import { Fragment } from "react";
 import UploadImg from "../upload/uploadImg";
 import { useGlobalstate } from "@/context/globalContext";
+import { Session } from "next-auth";
 // import { useSession } from "next-auth/react";
 
 const links = [
@@ -39,13 +40,10 @@ const links = [
   },
 ];
 
-export default function NavLeft({
-  image,
-}: {
-  image: string | null | undefined;
-}) {
+export default function NavLeft({ profile }: { profile: Session | null }) {
   const { openUpload, setOpenUpload } = useGlobalstate();
   // const { data } = useSession();
+  const image = profile?.user.image;
   return (
     <>
       <div
@@ -115,7 +113,7 @@ export default function NavLeft({
               href="/das"
               className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full  "
             >
-              <div className=" p-[12px] flex items-center w-full h-full relative">
+              <div className=" p-[12px] flex items-center w-full h-full relative ">
                 {image ? (
                   <img
                     src={image}
@@ -123,7 +121,7 @@ export default function NavLeft({
                     className="  rounded-full size-[24px] shrink-0  "
                   />
                 ) : (
-                  <div className=" absolute inset-0 bg-blue-200/60 " />
+                  <div className=" rounded-full size-[24px] shrink-0  bg-blue-200/60 " />
                 )}
 
                 <span className=" hidden lg:flex pl-[16px] ">Profile</span>
@@ -145,7 +143,7 @@ export default function NavLeft({
           </Link>
         </div>
       </div>
-      {openUpload && <UploadImg />}
+      {openUpload && <UploadImg profile={profile} />}
     </>
   );
 }

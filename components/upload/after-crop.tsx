@@ -5,14 +5,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
-import { motion } from "framer-motion";
 import { useGlobalstate } from "@/context/globalContext";
+import { Session } from "next-auth";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-export default function AfterCrop() {
+export default function AfterCrop({ profile }: { profile: Session | null }) {
   const [text, setText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const maxChars = 2000;
   const { caption, setCaption } = useGlobalstate();
+
+  const image = profile?.user.image;
+  const username = profile?.user.username;
 
   const handleEmojiClick = (emoji: any) => {
     setText(text + emoji.native); // اضافه کردن ایموجی به کامنت
@@ -26,15 +30,14 @@ export default function AfterCrop() {
         {/* <!-- profile name and pic --> */}
         <div className="mx-[20px] mb-[14px] mt-[18px] flex items-center gap-[12px]">
           <div className="relative size-[28px] overflow-hidden rounded-full border">
-            <img
-              src="https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-19/457668311_1966224583798580_2537510216727920967_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=3Zi3qG3N7y8Q7kNvgGJuzMG&_nc_gid=fb7e33df30d749ecbe74d14a51a7444a&edm=ADW0ovcBAAAA&ccb=7-5&oh=00_AYD5XiYR4owROgu5uYI-RStoUbTotinY4XVB6bygpXbCyg&oe=66DF829F&_nc_sid=db7772"
-              alt="profile pic"
-              className="absolute inset-0 object-cover"
-            />
+            <Avatar className=" relative size-[28px] overflow-hidden rounded-full border ">
+              <AvatarImage src={image!} alt="@shadcn" />
+              <AvatarFallback className="text-black bg-blue-400">
+                {username ?? ""}
+              </AvatarFallback>
+            </Avatar>
           </div>
-          <div className="text-[14px] text-[rgb(245,245,245)]">
-            classNameclassNameclassName
-          </div>
+          <div className="text-[14px] text-[rgb(245,245,245)]">{username}</div>
         </div>
 
         {/* <!-- input  --> */}

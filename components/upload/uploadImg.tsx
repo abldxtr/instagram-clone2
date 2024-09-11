@@ -9,8 +9,9 @@ import { useState } from "react";
 
 import { motion } from "framer-motion";
 import { createPost } from "@/lib/actions";
+import { Session } from "next-auth";
 
-export default function UploadImg() {
+export default function UploadImg({ profile }: { profile: Session | null }) {
   const {
     openModal,
     setOpenModal,
@@ -173,7 +174,7 @@ export default function UploadImg() {
                       </div>
                       {/* )} */}
                     </div>
-                    {openModal && <AfterCrop />}
+                    {openModal && <AfterCrop profile={profile} />}
                   </div>
                 </div>
               </div>

@@ -2,18 +2,18 @@
 
 import classNames from "classnames";
 import { Icons } from "../Icons";
-// import AfterCrop from "./after-crop";
-// import SelectBotton from "./selectFile";
 import { useGlobalstate } from "@/context/globalContext";
 import { useState } from "react";
 
-import { motion } from "framer-motion";
-import { UpdateProfilePic, createPost } from "@/lib/actions";
-import AfterCrop from "../upload/after-crop";
-import SelectBotton from "../upload/selectFile";
+import { UpdateProfilePic } from "@/lib/actions";
 import ProfileSelectBotton from "./profilePic-uploader";
+import { Session } from "next-auth";
 
-export default function ProfileUploadImg() {
+export default function ProfileUploadImg({
+  profile,
+}: {
+  profile: Session | null;
+}) {
   const {
     openModal,
     setOpenModal,
@@ -74,7 +74,7 @@ export default function ProfileUploadImg() {
       <div className="flex grow flex-col items-stretch justify-center w-full h-full ">
         <div className="m-[20px] flex items-center justify-center w-full h-full ">
           <div className="max-h-[calc(100%_-_40px)] rounded-[12px] bg-[rgb(38,38,38)]">
-            <motion.div
+            <div
               className={classNames(
                 "relative  overflow-hidden h-[391px] flex w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px] "
 
@@ -178,7 +178,7 @@ export default function ProfileUploadImg() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
