@@ -4,13 +4,20 @@ import { z } from "zod";
 
 export const PostSchema = z.object({
   id: z.string(),
-  fileUrl: z.string().url(),
+  // fileUrl: z.instanceof(Blob),
+  fileUrl: z.instanceof(File),
+
   caption: z.string().optional(),
 });
 
 export const CreatePost = PostSchema.omit({ id: true });
 export const UpdatePost = PostSchema;
 export const DeletePost = PostSchema.pick({ id: true });
+
+export const ProfilePicUpdateSchema = z.object({
+  // id: z.string(),
+  fileUrl: z.instanceof(File),
+});
 
 export const LikeSchema = z.object({
   postId: z.string(),

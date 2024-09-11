@@ -16,7 +16,8 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  /* background: var(--background); */
+  background: black;
   font-synthesis: none;
 }
 

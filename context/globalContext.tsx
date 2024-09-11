@@ -16,10 +16,6 @@ export type Message = {
 };
 
 type ContextType = {
-  //   messages: Message[];
-  //   setMessages: Dispatch<SetStateAction<Message[]>>;
-  //   imgtemp: string[];
-  //   setImgTemp: Dispatch<SetStateAction<string[]>>;
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   cropState: boolean;
@@ -32,19 +28,32 @@ type ContextType = {
   setCloseCrop: Dispatch<SetStateAction<boolean>>;
   coverPicture: string | ArrayBuffer;
   setCoverPicture: Dispatch<React.SetStateAction<string | ArrayBuffer>>;
+  openUpload: boolean;
+  setOpenUpload: Dispatch<SetStateAction<boolean>>;
+  caption: string;
+  setCaption: Dispatch<SetStateAction<string>>;
+  image: Blob | undefined;
+  setImage: Dispatch<React.SetStateAction<Blob | undefined>>;
+  fileName: File | null;
+  setFileName: Dispatch<React.SetStateAction<File | null>>;
+  changeProfileImg: boolean;
+  setChangeProfileImg: Dispatch<SetStateAction<boolean>>;
 };
 
 const GlobalContext = React.createContext<ContextType | null>(null);
 
 export function GlobalProvider({ children }: { children: ReactNode }) {
-  //   const [messages, setMessages] = useState<Message[]>([]);
-  //   const [imgtemp, setImgTemp] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [cropState, setCropState] = useState(false);
   const [triggerUpdateCover, setTriggerUpdateCover] = useState(false);
   const [backState, setBackState] = useState(false);
   const [closeCrop, setCloseCrop] = useState(false);
   const [coverPicture, setCoverPicture] = useState<string | ArrayBuffer>("");
+  const [openUpload, setOpenUpload] = useState(false);
+  const [caption, setCaption] = useState("");
+  const [image, setImage] = useState<Blob>();
+  const [fileName, setFileName] = useState<File | null>(null);
+  const [changeProfileImg, setChangeProfileImg] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -61,6 +70,16 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
         setCloseCrop,
         coverPicture,
         setCoverPicture,
+        openUpload,
+        setOpenUpload,
+        caption,
+        setCaption,
+        image,
+        setImage,
+        fileName,
+        setFileName,
+        changeProfileImg,
+        setChangeProfileImg,
       }}
     >
       {children}

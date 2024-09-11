@@ -161,6 +161,55 @@ export async function fetchProfile(username: string) {
   }
 }
 
+export async function fetchProfileByEmail(email: string) {
+  noStore();
+
+  try {
+    const data = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+      include: {
+        posts: {
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+        saved: {
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+        followedBy: {
+          include: {
+            follower: {
+              include: {
+                following: true,
+                followedBy: true,
+              },
+            },
+          },
+        },
+        following: {
+          include: {
+            following: {
+              include: {
+                following: true,
+                followedBy: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch profile");
+  }
+}
+
 export async function fetchSavedPostsByUsername(username: string) {
   noStore();
 

@@ -2,15 +2,18 @@
 
 import classNames from "classnames";
 import { Icons } from "../Icons";
-import AfterCrop from "./after-crop";
-import SelectBotton from "./selectFile";
+// import AfterCrop from "./after-crop";
+// import SelectBotton from "./selectFile";
 import { useGlobalstate } from "@/context/globalContext";
 import { useState } from "react";
 
 import { motion } from "framer-motion";
 import { createPost } from "@/lib/actions";
+import AfterCrop from "../upload/after-crop";
+import SelectBotton from "../upload/selectFile";
+import ProfileSelectBotton from "./profilePic-uploader";
 
-export default function UploadImg() {
+export default function ProfileUploadImg() {
   const {
     openModal,
     setOpenModal,
@@ -26,6 +29,8 @@ export default function UploadImg() {
     image,
     fileName,
     setCaption,
+    changeProfileImg,
+    setChangeProfileImg,
   } = useGlobalstate();
   const [sharebutton, setSharebutton] = useState(false);
 
@@ -49,16 +54,15 @@ export default function UploadImg() {
   };
 
   return (
-    <div className="fixed h-screen w-screen isolate z-[100] bg-[#000000a6]  ">
+    <div className="fixed h-full w-full isolate z-[100] bg-[#000000a6]  ">
       <div
         className="cursor-pointer p-[8px]"
         onClick={() => {
-          setOpenUpload(false);
+          setChangeProfileImg(false);
           setCoverPicture("");
           setCloseCrop(false);
           setShowBackButton(false);
           setOpenModal(false);
-          setCaption("");
         }}
       >
         <div className="fixed right-[10px] top-[10px] text-white">
@@ -72,11 +76,11 @@ export default function UploadImg() {
           <div className="max-h-[calc(100%_-_40px)] rounded-[12px] bg-[rgb(38,38,38)]">
             <motion.div
               className={classNames(
-                "relative  overflow-hidden h-[391px] flex ",
+                "relative  overflow-hidden h-[391px] flex w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px] "
 
-                openModal
-                  ? "md:w-[746px] md:min-w-[688px]"
-                  : "w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px]"
+                // openModal
+                //   ? "md:w-[746px] md:min-w-[688px]"
+                //   : "w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px]"
               )}
             >
               <div className=" flex w-full h-full flex-col grow ">
@@ -112,22 +116,19 @@ export default function UploadImg() {
                           <button
                             className="text-[14px] font-semibold text-[rgb(0,149,246)] hover:text-white"
                             onClick={() => {
-                              // عملکرد دکمه Share (در اینجا می‌توانید کد خود را اضافه کنید)
-                              // let formData = new FormData();
-                              // formData.append("name", fileWithName.name);
-                              // formData.append("file", fileWithName);
-                              // formData.append("caption", caption);
-                              // const filename = file.
-                              console.log("boolean", fileName !== null);
-                              if (fileName !== null) {
-                                createPost({
-                                  fileUrl: fileName,
-                                  caption,
-                                });
-                              }
+                              console.log(
+                                "boolean profile pic ",
+                                fileName !== null
+                              );
+                              //   if (fileName !== null) {
+                              //     createPost({
+                              //       fileUrl: fileName,
+                              //       caption,
+                              //     });
+                              //   }
                             }}
                           >
-                            Share
+                            Upload
                           </button>
                         ) : (
                           <button
@@ -142,7 +143,7 @@ export default function UploadImg() {
                   ) : (
                     <div className="h-full w-full">
                       <div className="flex h-full w-full items-center justify-center text-[16px] text-[rgb(245,245,245)]">
-                        Create new post
+                        Create profile pic
                       </div>
                     </div>
                   )}
@@ -169,11 +170,12 @@ export default function UploadImg() {
                             </div>
                           </>
                         )}
-                        <SelectBotton />
+                        {/* must be change */}
+                        <ProfileSelectBotton />
                       </div>
                       {/* )} */}
                     </div>
-                    {openModal && <AfterCrop />}
+                    {/* {openModal && <AfterCrop />} */}
                   </div>
                 </div>
               </div>

@@ -2,18 +2,19 @@ import { PostWithExtras } from "@/lib/definitions";
 import { HeartIcon, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import NoPost from "../profile/no-post";
 
 function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
   if (posts?.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center space-y-3 max-w-3xl lg:max-w-4xl mx-auto pb-20">
-        <p className="font-semibold text-sm text-neutral-400">No more posts.</p>
+        <NoPost />
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-3 gap-0.5">
+    <div className="grid grid-cols-3 gap-0.5 px-[20px] mb-[80px] ">
       {posts?.map((post) => (
         <Link
           href={`/dashboard/p/${post.id}`}

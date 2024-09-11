@@ -5,11 +5,11 @@ import { Icons } from "../Icons";
 import getCroppedImg from "@/utils/getImg";
 
 import Cropper from "react-easy-crop";
-import AfterCrop from "./after-crop";
+// import AfterCrop from "./after-crop";
 import { useGlobalstate } from "@/context/globalContext";
 import classNames from "classnames";
 
-export default function SelectBotton() {
+export default function ProfileSelectBotton() {
   const inputImgRef = useRef<HTMLInputElement>(null);
   const coverRef = useRef<HTMLInputElement | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -145,10 +145,11 @@ export default function SelectBotton() {
               // minZoom={0.1}
               maxZoom={3}
               // zoomSpeed={0.2}
-              // aspect={coverRef.current!.getBoundingClientRect().width / 384}
+              aspect={1 / 1}
               onZoomChange={setZoom}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
+              cropShape="round"
               // objectFit="horizontal-cover"
               objectFit="cover"
             />
@@ -173,7 +174,7 @@ export default function SelectBotton() {
         <img
           src={coverPicture as string}
           alt="Cropped"
-          className="object-fill h-full w-full  "
+          className="object-fill size-[150px] rounded-full  "
         />
       )}
     </>

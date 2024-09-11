@@ -5,19 +5,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
+import { motion } from "framer-motion";
+import { useGlobalstate } from "@/context/globalContext";
 
 export default function AfterCrop() {
   const [text, setText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const maxChars = 2000;
+  const { caption, setCaption } = useGlobalstate();
 
-  const handleEmojiClick = (emoji) => {
+  const handleEmojiClick = (emoji: any) => {
     setText(text + emoji.native); // اضافه کردن ایموجی به کامنت
     setShowEmojiPicker(false); // بستن پنجره ایموجی بعد از انتخاب
   };
+  //
 
   return (
-    <div className="absolute inset-1/2 inset-y-[43px] h-full w-[300px] overflow-hidden text-white md:w-[380px]">
+    <div className="flex flex-1 shrink flex-col overflow-auto border border-[rgb(54,54,54)] text-white origin-left	 ">
       <div className="relative h-full w-full border-l border-[rgb(54,54,54)]">
         {/* <!-- profile name and pic --> */}
         <div className="mx-[20px] mb-[14px] mt-[18px] flex items-center gap-[12px]">
@@ -38,8 +42,8 @@ export default function AfterCrop() {
           <div className="min-h-[168px] px-[16px] text-[16px] mb-2 ">
             <Textarea
               placeholder="Add a caption..."
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
               maxLength={maxChars}
               className="min-h-[168px] text-[16px] bg-[#262626] text-white border border-transparent "
             />
@@ -55,7 +59,8 @@ export default function AfterCrop() {
               {/* emoji icon */}
               <Icons.emoji />
               {showEmojiPicker && (
-                <div className="absolute bottom-12 left-0 z-10 w-[220px] h-[200px] [&_div]:h-[220px] ">
+                // <div className="absolute bottom-12 left-0 z-10 w-[220px] h-[200px] [&_div]:h-[220px] ">
+                <div className="absolute bottom-12 left-0 z-10 w-full h-[200px] [&_div]:h-[220px] ">
                   <Picker
                     data={data}
                     onEmojiSelect={handleEmojiClick}
