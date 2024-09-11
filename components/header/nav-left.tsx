@@ -5,6 +5,7 @@ import { Icons } from "../Icons";
 import { Fragment } from "react";
 import UploadImg from "../upload/uploadImg";
 import { useGlobalstate } from "@/context/globalContext";
+// import { useSession } from "next-auth/react";
 
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
@@ -38,8 +39,13 @@ const links = [
   },
 ];
 
-export default function NavLeft() {
+export default function NavLeft({
+  image,
+}: {
+  image: string | null | undefined;
+}) {
   const { openUpload, setOpenUpload } = useGlobalstate();
+  // const { data } = useSession();
   return (
     <>
       <div
@@ -110,11 +116,15 @@ export default function NavLeft() {
               className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full  "
             >
               <div className=" p-[12px] flex items-center w-full h-full relative">
-                <img
-                  src="https://lh3.googleusercontent.com/a/ACg8ocKSPfkrn2FFG2J-mEF3K9Wp9_3GGDfsYuu_IqmgKTpc=s96-c"
-                  alt="profile img"
-                  className="  rounded-full size-[24px] shrink-0  "
-                />
+                {image ? (
+                  <img
+                    src={image}
+                    alt="profile img"
+                    className="  rounded-full size-[24px] shrink-0  "
+                  />
+                ) : (
+                  <div className=" absolute inset-0 bg-blue-200/60 " />
+                )}
 
                 <span className=" hidden lg:flex pl-[16px] ">Profile</span>
               </div>

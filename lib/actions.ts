@@ -69,11 +69,14 @@ export async function UpdateProfilePic(
   try {
     const result = await uploadImg({ image: fileUrl });
     if ("success" in result && result.success?.url) {
-      // await db.user.update({
-      //   where:{
-      //     username
-      //   }
-      // });
+      if (username !== null && username !== undefined) {
+        await db.user.update({
+          where: {
+            username,
+          },
+          data: { image: result.success.url },
+        });
+      }
     }
   } catch (error) {
     return {
@@ -119,36 +122,9 @@ export async function uploadImg(values: z.infer<typeof formData>) {
   const finalName = `${random}-${Name}`;
 
   try {
-    // const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-    //   const uploadStream = cloudinary.uploader.upload_stream(
-    //     {
-    //       use_filename: true,
-    //       unique_filename: false,
-    //       resource_type: "image",
-    //     },
-    //     (error, result) => {
-    //       if (error || !result) {
-    //         console.error("Upload failed:", error);
-    //         reject({ error: "Upload failed" });
-    //       } else {
-    //         console.log("Upload successful:", result);
-    //         resolve(result);
-    //       }
-    //     }
-    //   );
-    //   uploadStream.end(image); // ارسال Blob
-    // });
-    // return { success: result };
-
-    // const result = await cloudinary.uploader.upload(image, {
-    //   use_filename: true,
-    //   unique_filename: false,
-    //   resource_type: "image",
-    // });
-
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    console.log("bufferfff", buffer);
+    // console.log("bufferfff", buffer);
     return new Promise<UploadResult>((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {

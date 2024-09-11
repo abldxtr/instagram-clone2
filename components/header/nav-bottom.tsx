@@ -23,7 +23,11 @@ const links = [
   },
 ];
 
-export default function BottomNav() {
+export default function BottomNav({
+  image,
+}: {
+  image: string | null | undefined;
+}) {
   return (
     <div className="fixed bottom-0 isolate z-10 h-[50px] w-full border-t border-[rgba(219,219,219,0.27)] bg-black md:hidden">
       <div className="[&_a]:mob_nav_bottom flex h-full w-full items-center justify-around text-white">
@@ -39,13 +43,17 @@ export default function BottomNav() {
 
         <Link
           href="/das"
-          className=" size-[24px] overflow-hidden rounded-full  "
+          className=" size-[24px] overflow-hidden rounded-full relative  "
         >
-          <img
-            src="https://lh3.googleusercontent.com/a/ACg8ocKSPfkrn2FFG2J-mEF3K9Wp9_3GGDfsYuu_IqmgKTpc=s96-c"
-            alt="profile img"
-            className="  rounded-full size-[24px] shrink-0  "
-          />
+          {image ? (
+            <img
+              src={image}
+              alt="profile img"
+              className="  rounded-full size-[24px] shrink-0  "
+            />
+          ) : (
+            <div className=" absolute inset-0 bg-blue-200/60 " />
+          )}
         </Link>
       </div>
     </div>

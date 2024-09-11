@@ -8,7 +8,7 @@ import { useGlobalstate } from "@/context/globalContext";
 import { useState } from "react";
 
 import { motion } from "framer-motion";
-import { createPost } from "@/lib/actions";
+import { UpdateProfilePic, createPost } from "@/lib/actions";
 import AfterCrop from "../upload/after-crop";
 import SelectBotton from "../upload/selectFile";
 import ProfileSelectBotton from "./profilePic-uploader";
@@ -120,12 +120,11 @@ export default function ProfileUploadImg() {
                                 "boolean profile pic ",
                                 fileName !== null
                               );
-                              //   if (fileName !== null) {
-                              //     createPost({
-                              //       fileUrl: fileName,
-                              //       caption,
-                              //     });
-                              //   }
+                              if (fileName !== null) {
+                                UpdateProfilePic({
+                                  fileUrl: fileName,
+                                });
+                              }
                             }}
                           >
                             Upload

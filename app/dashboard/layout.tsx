@@ -1,17 +1,22 @@
+import { auth } from "@/auth";
 import SideNav from "@/components/SideNav";
 import BottomNav from "@/components/header/nav-bottom";
 import NavLeft from "@/components/header/nav-left";
 import ProfileUiShow from "@/components/profile/profileUploader-pageshow";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
+  const image = session?.user.image;
+
   return (
     <div className="flex h-screen relative flex-col md:flex-row md:overflow-auto">
-      <BottomNav />
-      <NavLeft />
+      <BottomNav image={image} />
+      <NavLeft image={image} />
       <ProfileUiShow />
 
       {/* dashboard page */}

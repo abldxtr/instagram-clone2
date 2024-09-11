@@ -20,18 +20,16 @@ function ProfileIndex({
         <div className="mx-auto max-w-[935px] grow px-[20px] pt-[30px]">
           <header>
             <div className="flex items-center">
-              <ProfileImg />
-              <ProfileHeader />
+              <ProfileImg
+                image={profile.image}
+                isCurrentUser={isCurrentUser}
+                username={profile.username}
+              />
+              <ProfileHeader profile={profile} isCurrentUser={isCurrentUser} />
             </div>
           </header>
           <Plus />
           <ProfileMenue />
-
-          {/* {profile.posts.length === 0 ? (
-            <NoPost />
-          ) : (
-            <PostsGrid posts={profile.posts} />
-          )} */}
         </div>
       </section>
     </div>

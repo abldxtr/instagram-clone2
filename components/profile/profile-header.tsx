@@ -1,9 +1,17 @@
-function ProfileHeader() {
+import { UserWithExtras } from "@/lib/definitions";
+
+function ProfileHeader({
+  profile,
+  isCurrentUser,
+}: {
+  profile: UserWithExtras;
+  isCurrentUser: boolean;
+}) {
   return (
     <div className="flex flex-col">
       {/* 1 */}
       <div className="mb-[20px] flex items-center">
-        <div className="mr-[20px]">classNameclassNames</div>
+        <div className="mr-[20px]">{profile.username}</div>
         {/* <!-- buttom --> */}
         <div className="flex items-center gap-[8px]">
           <div>
@@ -22,23 +30,23 @@ function ProfileHeader() {
       <div className="mb-[20px] flex items-center gap-8 text-[16px] font-normal text-[rgb(245,245,245)]">
         {/* <!-- post number --> */}
         <div className="[text-align:_-webkit-match-parent]">
-          <span>0</span> posts
+          <span>{profile.posts.length}</span> posts
         </div>
 
         {/* <!-- followe number --> */}
         <div>
-          <span>1</span> follower
+          <span>{profile.following.length}</span> follower
         </div>
 
         {/* <!-- following number --> */}
         <div>
-          <span>4</span> following
+          <span>{profile.followedBy.length}</span> following
         </div>
       </div>
       {/* 3 */}
       <div>
         <div className="text-[14px] font-bold text-[rgb(245,245,245)]">
-          فروشگاه زنانه کیاتهران
+          {profile.bio}
         </div>
       </div>
     </div>
