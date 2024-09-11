@@ -17,7 +17,7 @@ export default function SelectBotton() {
   const [initialPicture, setInitialPicture] = useState<string | ArrayBuffer>(
     ""
   );
-  const [coverPicture, setCoverPicture] = useState<string | ArrayBuffer>("");
+  // const [coverPicture, setCoverPicture] = useState<string | ArrayBuffer>("");
   const [update, setUpdate] = useState(true);
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -30,6 +30,8 @@ export default function SelectBotton() {
     setBackState,
     closeCrop,
     setCloseCrop,
+    coverPicture,
+    setCoverPicture,
   } = useGlobalstate();
 
   //   const img = getCroppedImg();
@@ -139,20 +141,7 @@ export default function SelectBotton() {
               // objectFit="horizontal-cover"
               objectFit="cover"
             />
-            {/* <div className="absolute w-full bottom-0 bg-gray-800 bg-opacity-80 flex text-gray-200  px-6 py-3 justify-between items-center">
-              <div className="flex items-center space-x-2"></div>
-              <div className=" absolute bottom-5 ">
-                <button
-                  onClick={updateCover}
-                  className="bg-blue-500 rounded-lg font-semibold py-2 px-6 hover:bg-blue-600 transition-colors cursor-pointer"
-                ></button>
-              </div>
-            </div> */}
           </>
-          //   <img
-          //     src={coverPicture as string}
-          //     className=" absolute inset-0 object-fill  "
-          //   />
         )}
 
         {/* <AfterCrop /> */}
@@ -174,14 +163,6 @@ export default function SelectBotton() {
           className="absolute inset-0 object-fill h-full w-full  "
         />
       )}
-      {/* {coverPicture && (
-        <div
-          className=" absolute top-3 right-3  cursor-pointer text-black hover:bg-gray-100/50 p-2 rounded-[12px] "
-          onClick={() => setCoverPicture("")}
-        >
-          <Icons.close />
-        </div>
-      )} */}
     </>
   );
 }

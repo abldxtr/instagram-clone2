@@ -30,6 +30,8 @@ type ContextType = {
   setBackState: Dispatch<SetStateAction<boolean>>;
   closeCrop: boolean;
   setCloseCrop: Dispatch<SetStateAction<boolean>>;
+  coverPicture: string | ArrayBuffer;
+  setCoverPicture: Dispatch<React.SetStateAction<string | ArrayBuffer>>;
 };
 
 const GlobalContext = React.createContext<ContextType | null>(null);
@@ -42,6 +44,7 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
   const [triggerUpdateCover, setTriggerUpdateCover] = useState(false);
   const [backState, setBackState] = useState(false);
   const [closeCrop, setCloseCrop] = useState(false);
+  const [coverPicture, setCoverPicture] = useState<string | ArrayBuffer>("");
 
   return (
     <GlobalContext.Provider
@@ -56,6 +59,8 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
         setBackState,
         closeCrop,
         setCloseCrop,
+        coverPicture,
+        setCoverPicture,
       }}
     >
       {children}

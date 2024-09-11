@@ -11,14 +11,11 @@ export default function UploadImg() {
   const {
     openModal,
     setOpenModal,
-    cropState,
     setCropState,
-    triggerUpdateCover,
     setTriggerUpdateCover,
-    backState,
     setBackState,
-    closeCrop,
     setCloseCrop,
+    coverPicture,
   } = useGlobalstate();
   const [sharebutton, setSharebutton] = useState(false);
 
@@ -63,7 +60,7 @@ export default function UploadImg() {
             >
               {/* <!-- header --> */}
               <div className="h-[43px] border-b border-[rgb(54,54,54)]">
-                {cropState ? (
+                {coverPicture ? (
                   <div className="flex h-full w-full items-center justify-between px-[12px] text-[rgb(245,245,245)]">
                     {showBackButton ? (
                       <div

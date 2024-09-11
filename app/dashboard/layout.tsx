@@ -9,8 +9,9 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex h-screen relative flex-col md:flex-row md:overflow-hidden">
-      <BottomNav />
-      <NavLeft />
+      {/* <BottomNav /> */}
+      {/* <NavLeft /> */}
+      dashboard page
       <div className="w-20 flex-none lg:w-64 md:border-r">
         {/* <SideNav /> */}
       </div>

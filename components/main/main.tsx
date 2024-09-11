@@ -4,7 +4,7 @@ import PostActions from "../post/post-actions";
 import { postsWithExtras } from "./fake-data";
 
 export default function Main() {
-  const posts = postsWithExtras;
+  // const posts = postsWithExtras;
   return (
     <main className="z-[9] flex grow flex-col md:ml-[72px] lg:ml-[244px]">
       <div className="">
@@ -70,7 +70,7 @@ export default function Main() {
                     <div>
                       {/* like bookmark comment icone  */}
 
-                      {posts.map((post, index) => {
+                      {/* {posts.map((post, index) => {
                         <div key={index}>
                           <PostActions
                             post={post}
@@ -78,7 +78,7 @@ export default function Main() {
                             className="px-3 sm:px-0"
                           />
                         </div>;
-                      })}
+                      })} */}
 
                       {/* <!-- number of like --> */}
                       <section>
