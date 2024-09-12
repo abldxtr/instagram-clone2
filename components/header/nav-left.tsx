@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import UploadImg from "../upload/uploadImg";
 import { useGlobalstate } from "@/context/globalContext";
 import { Session } from "next-auth";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
@@ -42,8 +42,12 @@ const links = [
 
 export default function NavLeft({ profile }: { profile: Session | null }) {
   const { openUpload, setOpenUpload } = useGlobalstate();
-  // const { data } = useSession();
-  const image = profile?.user.image;
+  const { data } = useSession();
+  // const image = profile?.user.image;
+  const image = data?.user.image;
+  const username = data?.user.username;
+  const userPath = username ? `/dashboard/${username}` : "/dashboard";
+
   return (
     <>
       <div
@@ -110,7 +114,7 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
             {/* <!-- profile pic --> */}
 
             <Link
-              href="/das"
+              href={`${userPath}`}
               className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full  "
             >
               <div className=" p-[12px] flex items-center w-full h-full relative ">

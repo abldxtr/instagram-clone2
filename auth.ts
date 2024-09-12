@@ -21,6 +21,7 @@ const authConfig: NextAuthConfig = {
         const { email, password } = credentials;
 
         const validatedFields = LoginSchema.safeParse(credentials);
+        console.log("login", validatedFields);
 
         if (validatedFields.success) {
           const { email, password } = validatedFields.data;

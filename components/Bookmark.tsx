@@ -7,6 +7,7 @@ import { SavedPost } from "@prisma/client";
 import { Bookmark } from "lucide-react";
 import { useOptimistic } from "react";
 import ActionIcon from "./action-icon";
+import { bookmarkPost } from "@/lib/actions";
 
 type Props = {
   post: PostWithExtras;
@@ -33,7 +34,7 @@ function BookmarkButton({ post, userId }: Props) {
       action={async (formData: FormData) => {
         const postId = formData.get("postId");
         addOptimisticBookmark({ postId, userId });
-        // await bookmarkPost(postId);
+        await bookmarkPost(postId);
       }}
       className="ml-auto"
     >
@@ -41,8 +42,8 @@ function BookmarkButton({ post, userId }: Props) {
 
       <ActionIcon>
         <Bookmark
-          className={cn("h-6 w-6", {
-            "dark:fill-white fill-black": optimisticBookmarks.some(predicate),
+          className={cn("size-6 shrink-0 hover:text-[rgb(168,168,168)]", {
+            "fill-white ": optimisticBookmarks.some(predicate),
           })}
         />
       </ActionIcon>

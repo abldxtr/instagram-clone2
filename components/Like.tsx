@@ -7,6 +7,7 @@ import { useOptimistic } from "react";
 // import { likePost } from "@/lib/actions";
 import classNames from "classnames";
 import ActionIcon from "./action-icon";
+import { likePost } from "@/lib/actions";
 
 function LikeButton({
   post,
@@ -34,7 +35,7 @@ function LikeButton({
           const postId = formData.get("postId");
           addOptimisticLike({ postId, userId });
 
-          //   await likePost(postId);
+          await likePost(postId);
         }}
       >
         <input type="hidden" name="postId" value={post.id} />
@@ -42,18 +43,18 @@ function LikeButton({
         <ActionIcon>
           <Heart
             className={classNames(
-              "size-6",
+              "size-6 shrink-0 hover:scale-105",
               optimisticLikes.some(predicate) && "text-red-500 fill-red-500"
             )}
           />
         </ActionIcon>
       </form>
-      {optimisticLikes.length > 0 && (
+      {/* {optimisticLikes.length > 0 && (
         <p className="text-sm font-bold dark:text-white">
           {optimisticLikes.length}{" "}
           {optimisticLikes.length === 1 ? "like" : "likes"}
         </p>
-      )}
+      )} */}
     </div>
   );
 }
