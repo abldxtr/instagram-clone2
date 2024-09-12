@@ -1,14 +1,17 @@
+import { auth } from "@/auth";
 import MobNav from "./header/mobile-nav";
 import BottomNav from "./header/nav-bottom";
 import NavLeft from "./header/nav-left";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+  const img = session?.user.image;
   return (
     <>
       <MobNav />
-      <BottomNav />
+      <BottomNav image={img} />
 
-      <NavLeft />
+      <NavLeft profile={session} />
     </>
   );
 }

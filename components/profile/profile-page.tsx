@@ -4,7 +4,7 @@ import ProfileImg from "./profile-img";
 import ProfileHeader from "./profile-header";
 import Plus from "./plus";
 import ProfileMenue from "./profile-menue";
-import NoPost from "./no-post";
+// import NoPost from "./no-post";
 import PostsGrid from "../post/Posts-Grid";
 
 function ProfileIndex({
