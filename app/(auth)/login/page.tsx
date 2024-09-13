@@ -19,6 +19,7 @@ import { LoginSchema } from "@/index";
 import { login } from "@/actions/login";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Icons } from "@/components/Icons";
 
 export default function SignIn() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function SignIn() {
       //   if (setIsOpened) {
       //     setIsOpened(false);
       //   }
-      router.push("/");
+      router.push("/dashboard");
     } else {
       toast({
         description: res.message,
@@ -49,26 +50,31 @@ export default function SignIn() {
   }
 
   return (
-    <Card>
+    <Card className="w-[350px]  mx-auto bg-[rgb(38,38,38)] mt-20 !rounded-[0px] border-0  ">
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-2xl">
+          <div className=" mt-[36px] mb-[12px] text-white flex w-full items-center justify-center scale-150 ">
+            <Icons.InstaText />
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex gap-2 items-center justify-center my-2"></div>
-        <p className="text-sm text-center text-gray-500 my-2">
-          Sign in with your email and password
-        </p>
-
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2  ">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  {/* <FormLabel>Email</FormLabel> */}
                   <FormControl>
-                    <Input placeholder="" {...field} />
+                    <Input
+                      placeholder="email"
+                      {...field}
+                      className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)] 
+                      focus-within:border-[rgb(69,69,69)] outline-none pt-[9px] pb-[7px] pl-[8px]  w-full
+                       placeholder:text-[rgb(115,115,115)] placeholder:text-[12px] h-[36px]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -79,25 +85,30 @@ export default function SignIn() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
-                    <Input type="password" placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      {...field}
+                      className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)]
+                       focus-within:border-[rgb(69,69,69)] outline-none pt-[9px] pb-[7px] 
+                    pl-[8px]  w-full placeholder:text-[rgb(115,115,115)] placeholder:text-[12px] h-[36px] "
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <div>
-              <Button
-                type="button"
-                // onClick={()={}}
-                className="underline text-gray-500 px-0"
-                variant={"link"}
-              >
-                Don{"'"}t have an account? Sign up
-              </Button>
-            </div>
-            <Button type="submit">Login</Button>
+
+            <Button
+              type="submit"
+              className="bg-[rgb(0,149,246)] text-[rgb(245,245,245)] rounded-[8px] border border-[rgb(54,54,54)]
+               focus-within:border-[rgb(69,69,69)] outline-none  w-full py-[7px] px-[16px] font-bold text-[13px]
+                hover:bg-[#1877F2] "
+            >
+              Log in
+            </Button>
           </form>
         </Form>
       </CardContent>
