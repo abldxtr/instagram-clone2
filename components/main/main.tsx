@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { Icons } from "../Icons";
 import PostActions from "../post/post-actions";
-import { postsWithExtras } from "./fake-data";
 
 export default function Main() {
-  // const posts = postsWithExtras;
   return (
     <main className="z-[9] flex grow flex-col md:ml-[72px] lg:ml-[244px]">
       <div className="">
