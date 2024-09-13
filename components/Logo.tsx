@@ -8,7 +8,7 @@ import { Icons } from "./Icons";
 function Logo() {
   return (
     <Link href={"/dashboard"} className={classNames()}>
-      <Icons.logo />
+      <Icons.Instagram />
     </Link>
   );
 }
