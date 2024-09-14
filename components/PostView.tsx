@@ -67,7 +67,7 @@ function PostView({ id, post }: { id: string; post: PostWithExtras }) {
 
           {/* <ViewPost className="hidden md:flex border-b" /> */}
 
-          <div className="px-2 hidden md:block mt-auto border-b border-[rgb(54,54,54)] p-2.5 shrink-0 grow-0 ">
+          <div className="px-2 hidden md:block mt-auto  p-2.5 shrink-0 grow-0 ">
             <PostActions post={post} userId={user?.id} />
             <time className="text-[11px]  uppercase text-zinc-500 font-medium">
               {new Date(post.createdAt).toLocaleDateString("en-US", {

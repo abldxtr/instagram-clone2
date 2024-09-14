@@ -12,24 +12,24 @@ const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
   {
     name: "Search",
-    href: "/dashboard/search",
-    icon: <Icons.search />,
+    href: "/dashboard",
+    icon: <Icons.searchNav />,
   },
 
-  { name: "Explore", href: "/dashboard/explore", icon: <Icons.explore /> },
+  { name: "Explore", href: "/dashboard", icon: <Icons.explore /> },
   {
     name: "Reels",
-    href: "/dashboard/reels",
+    href: "/dashboard",
     icon: <Icons.Reels />,
   },
   {
     name: "Messages",
-    href: "/dashboard/messages",
+    href: "/dashboard",
     icon: <Icons.Direct />,
   },
   {
     name: "Notifications",
-    href: "/dashboard/notifications",
+    href: "/dashboard",
     icon: <Icons.notifications />,
   },
 

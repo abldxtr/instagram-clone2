@@ -4,21 +4,21 @@ import { Icons } from "../Icons";
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
 
-  { name: "Explore", href: "/dashboard/explore", icon: <Icons.explore /> },
+  { name: "Explore", href: "/dashboard", icon: <Icons.explore /> },
   {
     name: "Reels",
-    href: "/dashboard/reels",
+    href: "/dashboard",
     icon: <Icons.Reels />,
   },
 
   {
     name: "Create",
-    href: "/dashboard/create",
+    href: "/dashboard",
     icon: <Icons.Newpost />,
   },
   {
     name: "Messages",
-    href: "/dashboard/messages",
+    href: "/dashboard",
     icon: <Icons.Direct />,
   },
 ];

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { BeatLoader } from "react-spinners";
 
 import {
   Form,
@@ -20,10 +21,14 @@ import { login } from "@/actions/login";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icons } from "@/components/Icons";
+import Link from "next/link";
+import { useTransition } from "react";
 
 export default function SignIn() {
   const router = useRouter();
   const { toast } = useToast();
+
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -33,85 +38,105 @@ export default function SignIn() {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof LoginSchema>) {
-    const res = await login(data);
+  const submitAction = async () => {};
 
-    if (res.success) {
-      //   if (setIsOpened) {
-      //     setIsOpened(false);
-      //   }
-      router.push("/dashboard");
-    } else {
-      toast({
-        description: res.message,
-        variant: "destructive",
-      });
-    }
+  function onSubmit(data: z.infer<typeof LoginSchema>) {
+    startTransition(async () => {
+      const res = await login(data);
+      if (res.success) {
+        // setError(error);
+        router.push("/dashboard");
+      } else {
+        toast({
+          description: res.message,
+          variant: "destructive",
+        });
+      }
+    });
   }
 
   return (
-    <Card className="w-[350px]  mx-auto bg-[rgb(38,38,38)] mt-20 !rounded-[0px] border-0  ">
-      <CardHeader>
-        <CardTitle className="text-2xl">
-          <div className=" mt-[36px] mb-[12px] text-white flex w-full items-center justify-center scale-150 ">
-            <Icons.InstaText />
-          </div>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2  ">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  {/* <FormLabel>Email</FormLabel> */}
-                  <FormControl>
-                    <Input
-                      placeholder="email"
-                      {...field}
-                      className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)] 
+    <>
+      <Card className="w-[350px]  mx-auto bg-[rgb(38,38,38)] mt-20 !rounded-[0px] border-0  ">
+        <CardHeader>
+          <CardTitle className="text-2xl">
+            <div className=" mt-[36px] mb-[12px] text-white flex w-full items-center justify-center scale-150 ">
+              <Icons.InstaText />
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-2  "
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    {/* <FormLabel>Email</FormLabel> */}
+                    <FormControl>
+                      <Input
+                        placeholder="email"
+                        {...field}
+                        className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)] 
                       focus-within:border-[rgb(69,69,69)] outline-none pt-[9px] pb-[7px] pl-[8px]  w-full
                        placeholder:text-[rgb(115,115,115)] placeholder:text-[12px] h-[36px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  {/* <FormLabel>Password</FormLabel> */}
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      {...field}
-                      className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)]
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    {/* <FormLabel>Password</FormLabel> */}
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Password"
+                        {...field}
+                        className="bg-transparent text-[rgb(245,245,245)] rounded-[3px] border border-[rgb(54,54,54)]
                        focus-within:border-[rgb(69,69,69)] outline-none pt-[9px] pb-[7px] 
                     pl-[8px]  w-full placeholder:text-[rgb(115,115,115)] placeholder:text-[12px] h-[36px] "
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Button
-              type="submit"
-              className="bg-[rgb(0,149,246)] text-[rgb(245,245,245)] rounded-[8px] border border-[rgb(54,54,54)]
+              <Button
+                type="submit"
+                className="bg-[rgb(0,149,246)] text-[rgb(245,245,245)] rounded-[8px] border border-[rgb(54,54,54)]
                focus-within:border-[rgb(69,69,69)] outline-none  w-full py-[7px] px-[16px] font-bold text-[13px]
                 hover:bg-[#1877F2] "
+              >
+                {isPending ? <BeatLoader size={5} color="#ffffff" /> : "Log in"}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+      <Card className="w-[350px]  mx-auto bg-[rgb(38,38,38)] mt-4 !rounded-[0px] border-0   ">
+        <CardContent className=" flex w-full h-full items-center justify-center !p-[10px]  ">
+          {" "}
+          <div className=" text-[14px] text-[rgb(245,245,245)] flex w-full h-full items-center justify-center py-[10px]  ">
+            Don't have an account?
+            <Link
+              href="/register"
+              className=" text-[14px] text-[rgb(0,149,246)] ml-1 "
             >
-              Log in
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+              Sign up
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </>
   );
 }
