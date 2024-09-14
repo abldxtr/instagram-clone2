@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 // import SubmitButton from "@/components/SubmitButton";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
+
 import SubmitButton from "./SubmitButton";
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
 
 function PostOptions({ post, userId, className }: Props) {
   const isPostMine = post.userId === userId;
+  const { toast } = useToast();
 
   return (
     <Dialog>
@@ -34,7 +36,10 @@ function PostOptions({ post, userId, className }: Props) {
           <form
             action={async (formData) => {
               const { message } = await deletePost(formData);
-              toast(message);
+              toast({
+                description: message,
+                variant: "default",
+              });
             }}
             className="flex items-center justify-center dark:border-neutral-700 text-sm font-medium w-full"
           >

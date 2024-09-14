@@ -38,8 +38,6 @@ export default function SignIn() {
     },
   });
 
-  const submitAction = async () => {};
-
   function onSubmit(data: z.infer<typeof LoginSchema>) {
     startTransition(async () => {
       const res = await login(data);
