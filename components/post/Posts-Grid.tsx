@@ -14,7 +14,7 @@ function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-0.5 px-[20px] mb-[80px] mx-auto max-w-[935px] grow ">
+    <div className="grid grid-cols-3 gap-0.5 w-full px-[20px] mb-[80px] mx-auto max-w-[935px] grow relative z-10 ">
       {posts?.map((post) => (
         <Link
           href={`/dashboard/p/${post.id}`}

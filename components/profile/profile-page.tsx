@@ -15,8 +15,8 @@ function ProfileIndex({
   isCurrentUser: boolean;
 }) {
   return (
-    <div className="h-full  text-white ">
-      <section>
+    <div className="h-full w-full text-white ">
+      <section className=" flex h-full w-full ">
         <div className="mx-auto max-w-[935px] grow px-[20px] pt-[30px]">
           <header>
             <div className="flex items-center">

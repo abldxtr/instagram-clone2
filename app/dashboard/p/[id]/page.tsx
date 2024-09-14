@@ -1,5 +1,6 @@
 // import { SinglePostSkeleton } from "@/components/Skeletons";
 import { SinglePostSkeleton } from "@/components/Skeletons";
+import MorePosts from "@/components/post/MorePosts";
 import SinglePost from "@/components/post/SinglePost";
 import { Suspense } from "react";
 // import { Separator } from "@/components/ui/separator";
@@ -14,11 +15,11 @@ function PostPage({ params: { id } }: { params: { id: string } }) {
         {/* <div>post view yeah</div> */}
       </Suspense>
 
-      {/* <Separator className="my-12 max-w-3xl lg:max-w-4xl mx-auto" /> */}
+      <div className="my-12 max-w-3xl lg:max-w-4xl mx-auto" />
 
-      {/* <Suspense> */}
-      {/* <MorePosts postId={id} /> */}
-      {/* </Suspense> */}
+      <Suspense>
+        <MorePosts postId={id} />
+      </Suspense>
     </div>
   );
 }

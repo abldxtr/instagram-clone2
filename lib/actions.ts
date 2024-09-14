@@ -26,7 +26,7 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Post.",
+      // message: "Missing Fields. Failed to Create Post.",
     };
   }
 
@@ -48,9 +48,14 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
         },
       });
     }
+    return {
+      success: "the post is created",
+      // message:""
+    };
   } catch (error) {
     return {
-      message: "Database Error: Failed to Create Post.",
+      errors: "Database Error: Failed to Create Post.",
+      // message: "Database Error: Failed to Create Post.",
     };
   }
 

@@ -17,6 +17,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card } from "../ui/card";
 import PostActions from "./post-actions";
+import PostOptions from "./PostOptions";
+import MiniPost from "./MiniPost";
+import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import UserAvatar from "../profile/UserAvatar";
 // import { Card } from "./ui/card";
 // import MiniPost from "./MiniPost";
 
@@ -32,7 +37,7 @@ async function SinglePost({ id }: { id: string }) {
 
   return (
     <>
-      <Card className="max-w-3xl lg:max-w-4xl hidden md:flex mx-auto">
+      <Card className="max-w-3xl lg:max-w-4xl hidden md:flex mx-auto bg-black !border-[0px] !rounded-[0px] mt-8   ">
         <div className="relative overflow-hidden h-[450px] max-w-sm lg:max-w-lg w-full">
           <Image
             src={post.fileUrl}
@@ -44,29 +49,22 @@ async function SinglePost({ id }: { id: string }) {
 
         <div className="flex max-w-sm flex-col flex-1">
           <div className="flex items-center justify-between border-b px-5 py-3">
-            {/* <HoverCard>
-              <HoverCardTrigger asChild>
-                <Link
-                  className="font-semibold text-sm"
-                  href={`/dashboard/${postUsername}`}
-                >
+            <Link
+              className="font-semibold text-sm flex items-center space-x-2"
+              href={`/dashboard/${postUsername}`}
+            >
+              <UserAvatar user={post.user} className="h-14 w-14" />
+              <div>
+                <p className="font-bold text-[rgb(245,245,245)] ">
                   {postUsername}
-                </Link>
-              </HoverCardTrigger>
-              <HoverCardContent>
-                <div className="flex items-center space-x-2">
-                  <UserAvatar user={post.user} className="h-14 w-14" />
-                  <div>
-                    <p className="font-bold">{postUsername}</p>
-                    <p className="text-sm font-medium dark:text-neutral-400">
-                      {post.user.name}
-                    </p>
-                  </div>
-                </div>
-              </HoverCardContent>
-            </HoverCard> */}
+                </p>
+                <p className="text-sm font-medium text-[rgb(245,245,245)]">
+                  {post.user.name}
+                </p>
+              </div>
+            </Link>
 
-            {/* <PostOptions post={post} userId={userId} /> */}
+            <PostOptions post={post} userId={userId} />
           </div>
 
           {post.comments.length === 0 && (
@@ -78,25 +76,27 @@ async function SinglePost({ id }: { id: string }) {
             </div>
           )}
 
-          {/* {post.comments.length > 0 && (
+          {post.comments.length > 0 && (
             <ScrollArea className="hidden md:inline py-1.5 flex-1">
               <MiniPost post={post} />
               {post.comments.map((comment) => (
                 <Comment key={comment.id} comment={comment} />
               ))}
             </ScrollArea>
-          )} */}
+          )}
 
-          <div className="px-2 hidden md:block mt-auto border-y p-2.5">
+          <div className="px-2 hidden md:block mt-auto border-t p-2.5">
             <PostActions post={post} userId={userId} />
-            <time className="text-[11px] uppercase text-zinc-500 font-medium">
-              {new Date(post.createdAt).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
+            <div>
+              <time className="text-[11px] uppercase text-zinc-500 font-medium">
+                {new Date(post.createdAt).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
           </div>
-          {/* <CommentForm postId={id} className="hidden md:inline-flex" /> */}
+          <CommentForm postId={id} className="hidden md:inline-flex" />
         </div>
       </Card>
       <div className="md:hidden">{/* <Post post={post} /> */}</div>

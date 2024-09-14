@@ -5,6 +5,8 @@ import { GlobalProvider } from "@/context/globalContext";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+import classNames from "classnames";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,11 +29,29 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
 
+  const headersList = headers();
+  const domain = headersList.get("host") || "";
+  const fullUrl = headersList.get("referer") || "";
+  const [, pathname] =
+    fullUrl.match(new RegExp(`https?:\/\/${domain}(.*)`)) || [];
+
+  console.log(pathname);
+  const path = ["/login", "/register"];
+  const cond = path.includes(pathname);
+
+  // console.log(fullUrl.split("/")[-1]);
+
   return (
     <SessionProvider session={session}>
       <html lang="en">
         <GlobalProvider>
-          <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <body
+            className={classNames(
+              geistSans.variable,
+              geistMono.variable,
+              cond && "bg-black"
+            )}
+          >
             {children}
             <Toaster />
           </body>

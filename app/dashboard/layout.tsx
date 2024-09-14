@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   const image = session?.user.image;
 
   return (
-    <div className="flex h-screen relative flex-col md:flex-row md:overflow-auto">
+    <div className=" h-screen w-screen relative overflow-hidden bg-black">
       <BottomNav image={image} />
       <NavLeft profile={session} />
       <ProfileUiShow profile={session} />
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
         <SideNav />
       </div> */}
       {/* <div className="flex-grow mt-12 md:mt-0 flex-1 w-full md:overflow-y-auto sm:p-6 md:p-12 max-w-7xl mx-auto"> */}
-      <div className=" w-full h-full md:ml-[72px] lg:ml-[255px]">
+      <div className=" w-full h-full md:pl-[72px] lg:pl-[255px] overflow-y-auto ">
         {children}
       </div>
     </div>
