@@ -9,7 +9,7 @@ export default async function Header() {
   return (
     <>
       <MobNav />
-      <BottomNav image={img} />
+      <BottomNav profile={session} />
 
       <NavLeft profile={session} />
     </>
