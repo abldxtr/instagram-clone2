@@ -1,17 +1,7 @@
 import { auth } from "@/auth";
-import ProfileIndex from "@/components/profile/profile-page";
-import ProfileUiShow from "@/components/profile/profileUploader-pageshow";
-// import FollowButton from "@/components/FollowButton";
-// import ProfileAvatar from "@/components/ProfileAvatar";
-// import ProfileHeader from "@/components/ProfileHeader";
-// import ProfileTabs from "@/components/ProfileTabs";
-// import UserAvatar from "@/components/UserAvatar";
-import { Button, buttonVariants } from "@/components/ui/button";
+
 import { fetchProfile } from "@/lib/data";
-import { MoreHorizontal, Settings } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
 
 type Props = {
   params: {

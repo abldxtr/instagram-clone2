@@ -6,13 +6,16 @@ import Plus from "./plus";
 import ProfileMenue from "./profile-menue";
 // import NoPost from "./no-post";
 import PostsGrid from "../post/Posts-Grid";
+import { Session } from "next-auth";
 
 function ProfileIndex({
   profile,
   isCurrentUser,
+  session,
 }: {
   profile: UserWithExtras;
   isCurrentUser: boolean;
+  session: Session | null;
 }) {
   return (
     <div className="h-full w-full text-white ">
@@ -25,7 +28,11 @@ function ProfileIndex({
                 isCurrentUser={isCurrentUser}
                 username={profile.username}
               />
-              <ProfileHeader profile={profile} isCurrentUser={isCurrentUser} />
+              <ProfileHeader
+                profile={profile}
+                isCurrentUser={isCurrentUser}
+                session={session}
+              />
             </div>
           </header>
           <Plus />

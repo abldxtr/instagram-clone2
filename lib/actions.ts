@@ -9,6 +9,7 @@ import {
   CreatePost,
   DeleteComment,
   DeletePost,
+  FollowUser,
   LikeSchema,
   ProfilePicUpdateSchema,
 } from "./schemas";
@@ -397,5 +398,68 @@ export async function deleteComment(formData: FormData) {
     return { message: "Deleted Comment." };
   } catch (error) {
     return { message: "Database Error: Failed to Delete Comment." };
+  }
+}
+
+export async function followUser(formData: FormData) {
+  const { userId } = await getUserId();
+
+  const { id } = FollowUser.parse({
+    id: formData.get("id"),
+  });
+
+  const user = await db.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const follows = await db.follows.findUnique({
+    where: {
+      followerId_followingId: {
+        // followerId is of the person who wants to follow
+        followerId: userId,
+        // followingId is of the person who is being followed
+        followingId: id,
+      },
+    },
+  });
+
+  if (follows) {
+    try {
+      await db.follows.delete({
+        where: {
+          followerId_followingId: {
+            followerId: userId,
+            followingId: id,
+          },
+        },
+      });
+      revalidatePath("/dashboard");
+      return { message: "Unfollowed User." };
+    } catch (error) {
+      return {
+        message: "Database Error: Failed to Unfollow User.",
+      };
+    }
+  }
+
+  try {
+    await db.follows.create({
+      data: {
+        followerId: userId,
+        followingId: id,
+      },
+    });
+    revalidatePath("/dashboard");
+    return { message: "Followed User." };
+  } catch (error) {
+    return {
+      message: "Database Error: Failed to Follow User.",
+    };
   }
 }

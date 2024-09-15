@@ -25,7 +25,11 @@ async function ProfilePage({
 
   return (
     <div className="  mx-auto max-w-[935px] w-full ">
-      <ProfileIndex profile={profile} isCurrentUser={isCurrentUser} />
+      <ProfileIndex
+        profile={profile}
+        isCurrentUser={isCurrentUser}
+        session={session}
+      />
 
       <PostsGrid posts={posts} />
     </div>
