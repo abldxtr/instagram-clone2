@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import UploadImg from "../upload/uploadImg";
 import { useGlobalstate } from "@/context/globalContext";
 import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
@@ -135,16 +135,16 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
 
           {/* icone option dropdown */}
 
-          <Link
-            href="/"
+          <div
             className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full"
+            onClick={() => signOut()}
           >
             <div className=" p-[12px] flex items-center w-full h-full ">
               <Icons.Settings />
 
-              <span className=" hidden lg:flex pl-[16px] ">More</span>
+              <span className=" hidden lg:flex pl-[16px] ">Log out</span>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
       {openUpload && <UploadImg profile={profile} />}

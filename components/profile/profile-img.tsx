@@ -3,6 +3,7 @@ import { useGlobalstate } from "@/context/globalContext";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import ProfileUploadImg from "./profileUploader-ui";
 import { UserWithExtras } from "@/lib/definitions";
+import classNames from "classnames";
 
 function ProfileImg({
   image,
@@ -18,7 +19,10 @@ function ProfileImg({
     <div>
       <div className="mr-[20px]">
         <Avatar
-          className=" relative size-[150px] overflow-hidden rounded-full border "
+          className={classNames(
+            " relative size-[150px] overflow-hidden rounded-full border ",
+            isCurrentUser && "cursor-pointer"
+          )}
           onClick={() => isCurrentUser && setChangeProfileImg(true)}
         >
           <AvatarImage src={image!} alt="@shadcn" />
