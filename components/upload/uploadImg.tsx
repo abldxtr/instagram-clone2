@@ -8,7 +8,6 @@ import { useGlobalstate } from "@/context/globalContext";
 import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { motion } from "framer-motion";
 import { createPost } from "@/lib/actions";
 import { Session } from "next-auth";
 import { useOnClickOutside } from "usehooks-ts";
@@ -159,19 +158,6 @@ export default function UploadImg({ profile }: { profile: Session | null }) {
                           <button
                             className="text-[14px] font-semibold text-[rgb(0,149,246)] hover:text-white"
                             onClick={() => {
-                              // عملکرد دکمه Share (در اینجا می‌توانید کد خود را اضافه کنید)
-                              // let formData = new FormData();
-                              // formData.append("name", fileWithName.name);
-                              // formData.append("file", fileWithName);
-                              // formData.append("caption", caption);
-                              // const filename = file.
-                              // console.log("boolean", fileName !== null);
-                              // if (fileName !== null) {
-                              //   createPost({
-                              //     fileUrl: fileName,
-                              //     caption,
-                              //   });
-                              // }
                               submitAction();
                             }}
                           >

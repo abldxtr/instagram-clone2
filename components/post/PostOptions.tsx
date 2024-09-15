@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 
 import SubmitButton from "./SubmitButton";
+import { useRouter } from "next/navigation";
 
 type Props = {
   post: PostWithExtras;
@@ -20,6 +21,7 @@ type Props = {
 function PostOptions({ post, userId, className }: Props) {
   const isPostMine = post.userId === userId;
   const { toast } = useToast();
+  const router = useRouter();
 
   return (
     <Dialog>
@@ -36,6 +38,8 @@ function PostOptions({ post, userId, className }: Props) {
           <form
             action={async (formData) => {
               const { message } = await deletePost(formData);
+              router.back();
+              router.refresh();
               toast({
                 description: message,
                 variant: "default",

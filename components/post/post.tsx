@@ -16,12 +16,14 @@ async function Post({ post }: { post: PostWithExtras }) {
   const userId = session?.user?.id;
   const username = post.user.username;
 
+  const userPath = username ? `/dashboard/${username}` : "/dashboard";
+
   if (!session?.user) return null;
 
   return (
     <div className="flex flex-col space-y-2.5">
       <div className="flex items-center justify-between px-3 sm:px-0">
-        <div className="flex space-x-3 items-center">
+        <Link href={userPath} className="flex space-x-3 items-center">
           <UserAvatar user={post.user} />
           <div className="text-sm">
             <p className="space-x-1">
@@ -38,7 +40,7 @@ async function Post({ post }: { post: PostWithExtras }) {
               <Timestamp createdAt={post.createdAt} />
             </p>
           </div>
-        </div>
+        </Link>
 
         <PostOptions post={post} userId={userId} />
       </div>

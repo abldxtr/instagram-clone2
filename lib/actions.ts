@@ -72,8 +72,8 @@ export async function UpdateProfilePic(
 
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Post.",
+      // errors: validatedFields.error.flatten().fieldErrors,
+      error: "Missing Fields. Failed to Create Post.",
     };
   }
 
@@ -91,9 +91,12 @@ export async function UpdateProfilePic(
         });
       }
     }
+    return {
+      success: "profile is changed",
+    };
   } catch (error) {
     return {
-      message: "Database Error: Failed to Create Post.",
+      error: "Database Error: Failed to Create Post.",
     };
   }
 

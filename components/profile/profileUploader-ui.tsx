@@ -3,11 +3,14 @@
 import classNames from "classnames";
 import { Icons } from "../Icons";
 import { useGlobalstate } from "@/context/globalContext";
-import { useState } from "react";
+import { useRef, useState, useTransition } from "react";
 
 import { UpdateProfilePic } from "@/lib/actions";
 import ProfileSelectBotton from "./profilePic-uploader";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { useOnClickOutside } from "usehooks-ts";
 
 export default function ProfileUploadImg({
   profile,
@@ -32,10 +35,55 @@ export default function ProfileUploadImg({
     changeProfileImg,
     setChangeProfileImg,
   } = useGlobalstate();
-  const [sharebutton, setSharebutton] = useState(false);
 
   const [showBackButton, setShowBackButton] = useState(false);
   const [shareButton, setShareButton] = useState(false);
+
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const handleClickOutside = () => {
+    // Your custom logic here
+    setOpenUpload(false);
+    setCoverPicture("");
+    setCloseCrop(false);
+    setShowBackButton(false);
+    setOpenModal(false);
+    setCaption("");
+    setChangeProfileImg(false);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const submitAction = async () => {
+    startTransition(async () => {
+      if (fileName !== null) {
+        const { success, error } = await UpdateProfilePic({
+          fileUrl: fileName,
+        });
+        if (error) {
+          toast({
+            description: "try again!",
+            variant: "destructive",
+          });
+        }
+        if (success) {
+          setOpenModal(false);
+          setShareButton(false);
+          setBackState(true);
+          setCloseCrop(true);
+          setCropState(false);
+          setCaption("");
+          setChangeProfileImg(false);
+
+          router.refresh();
+        }
+      }
+    });
+  };
 
   const handleNext = () => {
     setCloseCrop(true);
@@ -77,12 +125,15 @@ export default function ProfileUploadImg({
             <div
               className={classNames(
                 "relative  overflow-hidden h-[391px] flex w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px] "
-
-                // openModal
-                //   ? "md:w-[746px] md:min-w-[688px]"
-                //   : "w-[406px] max-h-[898px]  min-w-[348px] max-w-[855px]"
               )}
+              ref={ref}
             >
+              {isPending && (
+                <div
+                  className="w-full z-[10] absolute inset-x-0 h-1 top-[42px] bg-gradient-to-r from-purple-500 via-pink-500 via-red-500
+               via-orange-500 via-yellow-500 via-green-500 via-blue-500 to-indigo-500 animate-pulse "
+                />
+              )}
               <div className=" flex w-full h-full flex-col grow ">
                 {/* <!-- header --> */}
                 <div className="h-[43px] border-b border-[rgb(54,54,54)] shrink-0 ">
@@ -116,15 +167,16 @@ export default function ProfileUploadImg({
                           <button
                             className="text-[14px] font-semibold text-[rgb(0,149,246)] hover:text-white"
                             onClick={() => {
-                              console.log(
-                                "boolean profile pic ",
-                                fileName !== null
-                              );
-                              if (fileName !== null) {
-                                UpdateProfilePic({
-                                  fileUrl: fileName,
-                                });
-                              }
+                              // console.log(
+                              //   "boolean profile pic ",
+                              //   fileName !== null
+                              // );
+                              // if (fileName !== null) {
+                              //   UpdateProfilePic({
+                              //     fileUrl: fileName,
+                              //   });
+                              // }
+                              submitAction();
                             }}
                           >
                             Upload
