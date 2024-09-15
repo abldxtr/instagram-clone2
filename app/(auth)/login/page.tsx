@@ -125,7 +125,7 @@ export default function SignIn() {
         <CardContent className=" flex w-full h-full items-center justify-center !p-[10px]  ">
           {" "}
           <div className=" text-[14px] text-[rgb(245,245,245)] flex w-full h-full items-center justify-center py-[10px]  ">
-            Don't have an account?
+            Don&apos;t have an account?
             <Link
               href="/register"
               className=" text-[14px] text-[rgb(0,149,246)] ml-1 "
