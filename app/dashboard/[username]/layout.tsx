@@ -35,26 +35,7 @@ export async function generateMetadata(
 }
 
 async function ProfileLayout({ children, params: { username } }: Props) {
-  // const profile = await fetchProfile(username);
-  // const session = await auth();
-  // const isCurrentUser = session?.user.id === profile?.id;
-  // //   the followerId here is the id of the user who is following the profile
-  // const isFollowing = profile?.followedBy.some(
-  //   (user) => user.followerId === session?.user.id
-  // );
-
-  // if (!profile) {
-  //   notFound();
-  // }
-  return (
-    <>
-      <div className="bg-black w-full overflow-y-auto  ">
-        {/* <ProfileIndex profile={profile} isCurrentUser={isCurrentUser} /> */}
-
-        {children}
-      </div>
-    </>
-  );
+  return <div className="bg-black w-full overflow-y-auto  ">{children}</div>;
 }
 
 export default ProfileLayout;

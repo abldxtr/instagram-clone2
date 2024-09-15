@@ -142,7 +142,7 @@ export default function SelectBotton() {
               image={coverPicture as string}
               zoom={zoom}
               crop={crop}
-              // minZoom={0.1}
+              minZoom={0.8}
               maxZoom={3}
               // zoomSpeed={0.2}
               // aspect={coverRef.current!.getBoundingClientRect().width / 384}

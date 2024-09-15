@@ -19,7 +19,7 @@ export default function AfterCrop({ profile }: { profile: Session | null }) {
   const username = profile?.user.username;
 
   const handleEmojiClick = (emoji: any) => {
-    setText(text + emoji.native); // اضافه کردن ایموجی به کامنت
+    setCaption(caption + emoji.native);
     setShowEmojiPicker(false); // بستن پنجره ایموجی بعد از انتخاب
   };
   //
@@ -56,7 +56,7 @@ export default function AfterCrop({ profile }: { profile: Session | null }) {
           <div className="flex w-full items-center justify-between px-[16px] text-white">
             {/* <!-- emoji icone --> */}
             <div
-              className="text-[rgb(168,168,168)] relative"
+              className="text-[rgb(168,168,168)] relative cursor-pointer "
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             >
               {/* emoji icon */}

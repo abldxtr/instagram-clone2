@@ -1,7 +1,6 @@
 "use client";
 
-import { Link, Send } from "lucide-react";
-import { toast } from "sonner";
+// import { Link, Send } from "lucide-react";
 import ActionIcon from "./action-icon";
 import { Icons } from "./Icons";
 

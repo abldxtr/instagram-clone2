@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
-import SideNav from "@/components/SideNav";
 import BottomNav from "@/components/header/nav-bottom";
 import NavLeft from "@/components/header/nav-left";
 import ProfileUiShow from "@/components/profile/profileUploader-pageshow";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
@@ -11,19 +11,17 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
+  if (!session) {
+    redirect("/register");
+  }
   const image = session?.user.image;
 
   return (
     <div className=" h-screen w-screen relative overflow-hidden bg-black">
-      <BottomNav image={image} />
+      <BottomNav profile={session} />
       <NavLeft profile={session} />
       <ProfileUiShow profile={session} />
 
-      {/* dashboard page */}
-      {/* <div className="w-20 flex-none lg:w-64 md:border-r">
-        <SideNav />
-      </div> */}
-      {/* <div className="flex-grow mt-12 md:mt-0 flex-1 w-full md:overflow-y-auto sm:p-6 md:p-12 max-w-7xl mx-auto"> */}
       <div className=" w-full h-full md:pl-[72px] lg:pl-[255px] overflow-y-auto ">
         {children}
       </div>

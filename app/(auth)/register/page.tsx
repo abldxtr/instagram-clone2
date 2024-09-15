@@ -4,11 +4,10 @@ import { redirect } from "next/navigation";
 
 export default async function SignupPage() {
   const user = await auth();
-  console.log("user", user);
 
-  // if (user) {
-  //   redirect("/login");
-  // }
+  if (user) {
+    redirect("/dashboard");
+  }
   return (
     <div className="">
       <SignUpForm />

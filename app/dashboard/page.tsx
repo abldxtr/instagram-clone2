@@ -1,5 +1,3 @@
-// import Posts from "@/components/Posts";
-// import { PostsSkeleton } from "@/components/Skeletons";
 import { PostsSkeleton } from "@/components/Skeletons";
 import Posts from "@/components/post/posts";
 import { Suspense } from "react";

@@ -1,4 +1,3 @@
-import SideNav from "@/components/SideNav";
 
 export default function AuthRegisterLayout({
   children,

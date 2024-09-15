@@ -24,17 +24,10 @@ function PostActions({ post, userId, className }: Props) {
       )}
     >
       <LikeButton post={post} userId={userId} />
-      {/* <Link href={`/dashboard/p/${post.id}`}> */}
-      {/* <ActionIcon> */}
       <ActionIcon>
-        {/* <MessageCircle
-          className={"size-6 shrink-0 hover:text-[rgb(168,168,168)]"}
-        /> */}
         <Icons.Comment className=" hover:scale-105 " />
       </ActionIcon>
 
-      {/* </ActionIcon> */}
-      {/* </Link> */}
       <ShareButton postId={post.id} />
       <BookmarkButton post={post} userId={userId} />
     </div>

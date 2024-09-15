@@ -1,12 +1,15 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 import { Icons } from "../Icons";
 import { Fragment } from "react";
-import UploadImg from "../upload/uploadImg";
-import { useGlobalstate } from "@/context/globalContext";
+// import UploadImg from "../upload/uploadImg";
+// import { useGlobalstate } from "@/context/globalContext";
 import { Session } from "next-auth";
-import { signOut, useSession } from "next-auth/react";
+import ServerItemProfileLink from "./profile-link";
+import ServerItemLogOut from "./Nav-serverside";
+import CreateItem, { NavUpload } from "./create-item";
+import { auth } from "@/auth";
 
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
@@ -40,13 +43,13 @@ const links = [
   },
 ];
 
-export default function NavLeft({ profile }: { profile: Session | null }) {
-  const { openUpload, setOpenUpload } = useGlobalstate();
-  const { data } = useSession();
-  // const image = profile?.user.image;
-  const image = data?.user.image;
-  const username = data?.user.username;
-  const userPath = username ? `/dashboard/${username}` : "/dashboard";
+export default function NavLeft({
+  profile,
+}: {
+  profile: Session | null;
+}) {
+  // const { openUpload, setOpenUpload } = useGlobalstate();
+  const user = profile;
 
   return (
     <>
@@ -95,17 +98,7 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
                       </div>
                     </Link>
                   ) : (
-                    <div
-                      className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full"
-                      onClick={() => setOpenUpload(true)}
-                    >
-                      <div className=" p-[12px] flex items-center w-full h-full ">
-                        {item.icon}
-                        <span className=" hidden lg:flex pl-[16px] ">
-                          {item.name}
-                        </span>
-                      </div>
-                    </div>
+                    <CreateItem item={item} />
                   )}
                 </Fragment>
               );
@@ -113,41 +106,16 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
 
             {/* <!-- profile pic --> */}
 
-            <Link
-              href={`${userPath}`}
-              className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full  "
-            >
-              <div className=" p-[12px] flex items-center w-full h-full relative ">
-                {image ? (
-                  <img
-                    src={image}
-                    alt="profile img"
-                    className="  rounded-full size-[24px] shrink-0  "
-                  />
-                ) : (
-                  <div className=" rounded-full size-[24px] shrink-0  bg-blue-200/60 " />
-                )}
-
-                <span className=" hidden lg:flex pl-[16px] ">Profile</span>
-              </div>
-            </Link>
+            <ServerItemProfileLink user={user} />
           </div>
 
           {/* icone option dropdown */}
 
-          <div
-            className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full"
-            onClick={() => signOut()}
-          >
-            <div className=" p-[12px] flex items-center w-full h-full ">
-              <Icons.Settings />
-
-              <span className=" hidden lg:flex pl-[16px] ">Log out</span>
-            </div>
-          </div>
+          <ServerItemLogOut user={user} />
         </div>
       </div>
-      {openUpload && <UploadImg profile={profile} />}
+      <NavUpload />
+      {/* {openUpload && <UploadImg profile={profile} />} */}
     </>
   );
 }
