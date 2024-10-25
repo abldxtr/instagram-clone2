@@ -1,8 +1,9 @@
 import { PostWithExtras } from "@/lib/definitions";
 import { HeartIcon, MessageCircle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import NoPost from "./no-post";
+import { Link } from "../link";
 
 function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
   if (posts?.length === 0) {
@@ -19,6 +20,7 @@ function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
         <Link
           href={`/dashboard/p/${post.id}`}
           key={post.id}
+          prefetch={true}
           className="relative flex items-center justify-center h-44 md:h-64 lg:h-80 group col-span-1"
         >
           <Image

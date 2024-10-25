@@ -21,8 +21,9 @@ import { login } from "@/actions/login";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icons } from "@/components/Icons";
-import Link from "next/link";
+// import Link from "next/link";
 import { useTransition } from "react";
+import { Link } from "@/components/link";
 
 export default function SignIn() {
   const router = useRouter();
@@ -129,6 +130,7 @@ export default function SignIn() {
             <Link
               href="/register"
               className=" text-[14px] text-[rgb(0,149,246)] ml-1 "
+              prefetch={true}
             >
               Sign up
             </Link>
