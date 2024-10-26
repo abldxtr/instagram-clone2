@@ -49,6 +49,11 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
         },
       });
     }
+    revalidateTag("fetchPosts");
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
+    revalidatePath(`/dashboard/${username}`);
+    // redirect(`/dashboard/${username}`);
     return {
       success: "the post is created",
       // message:""
