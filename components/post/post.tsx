@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import UserAvatar from "../profile/UserAvatar";
 import Timestamp from "../Timestamp";
 import PostOptions from "./PostOptions";
@@ -10,6 +10,7 @@ import PostActions from "./post-actions";
 import { CommentWithExtras, LikeWithExtras } from "@/lib/definitions";
 import { SavedPost, User } from "@prisma/client";
 import Comments from "./Comments";
+import { Link } from "../link";
 
 async function Post({ post }: { post: PostWithExtras }) {
   const session = await auth();
@@ -23,7 +24,11 @@ async function Post({ post }: { post: PostWithExtras }) {
   return (
     <div className="flex flex-col space-y-2.5">
       <div className="flex items-center justify-between px-3 sm:px-0">
-        <Link href={userPath} className="flex space-x-3 items-center">
+        <Link
+          href={userPath}
+          className="flex space-x-3 items-center"
+          prefetch={true}
+        >
           <UserAvatar user={post.user} />
           <div className="text-sm">
             <p className="space-x-1">
@@ -61,6 +66,7 @@ async function Post({ post }: { post: PostWithExtras }) {
           <Link
             href={`/dashboard/${username}`}
             className="font-bold text-[rgb(245,245,245)]"
+            prefetch={true}
           >
             {username}
           </Link>

@@ -23,7 +23,8 @@ import { RegisterSchema } from "@/index";
 import { useToast } from "@/hooks/use-toast";
 import { Icons } from "../Icons";
 import { useTransition } from "react";
-import Link from "next/link";
+import { Link } from "../link";
+// import Link from "next/link";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -153,6 +154,7 @@ export default function SignUpForm() {
             <Link
               href="/login"
               className=" text-[14px] text-[rgb(0,149,246)] ml-1 "
+              prefetch={true}
             >
               Log in
             </Link>
