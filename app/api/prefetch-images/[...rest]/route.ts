@@ -19,14 +19,21 @@ export async function GET(
 ) {
   const schema = process.env.NODE_ENV === "development" ? "http" : "https";
   const host = getHostname();
+  console.log("host", host);
   if (!host) {
     return new Response("Failed to get hostname from env", { status: 500 });
   }
-  const href = (await params).rest.join("/");
+  // const href = (await params).rest.join("/");
+  const href = params.rest.join("/");
+
+  console.log("href", href);
+
   if (!href) {
     return new Response("Missing url parameter", { status: 400 });
   }
   const url = `${schema}://${host}/${href}`;
+  console.log("url", url);
+
   const response = await fetch(url);
   if (!response.ok) {
     return new Response("Failed to fetch", { status: response.status });

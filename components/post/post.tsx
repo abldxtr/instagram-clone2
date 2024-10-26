@@ -56,6 +56,8 @@ async function Post({ post }: { post: PostWithExtras }) {
           alt="Post Image"
           fill
           className="sm:rounded-md object-cover"
+          loading="eager"
+          decoding="sync"
         />
       </div>
 

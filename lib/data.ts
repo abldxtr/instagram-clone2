@@ -64,9 +64,7 @@ export const fetchPosts = unstable_cache(
     return data;
   },
   ["fetchPosts"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchPosts"] }
 );
 
 // export async function fetchPostById(id: string) {
@@ -131,9 +129,7 @@ export const fetchPostById = unstable_cache(
     return data;
   },
   ["fetchPostById"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchPostById"] }
 );
 
 // export async function fetchPostsByUsername(username: string, postId?: string) {
@@ -213,9 +209,7 @@ export const fetchPostsByUsername = unstable_cache(
     return data;
   },
   ["fetchPostsByUsername"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchPostsByUsername"] }
 );
 
 // export async function fetchProfile(username: string) {
@@ -315,9 +309,7 @@ export const fetchProfile = unstable_cache(
     // }
   },
   ["fetchProfile"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchProfile"] }
 );
 
 // export async function fetchProfileByEmail(email: string) {
@@ -417,9 +409,7 @@ export const fetchProfileByEmail = unstable_cache(
     // }
   },
   ["fetchProfileByEmail"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchProfileByEmail"] }
 );
 
 // export async function fetchSavedPostsByUsername(username: string) {
@@ -507,7 +497,5 @@ export const fetchSavedPostsByUsername = unstable_cache(
     // }
   },
   ["fetchSavedPostsByUsername"],
-  {
-    revalidate: 60 * 60 * 2, // two hours,
-  }
+  { tags: ["fetchSavedPostsByUsername"] }
 );

@@ -31,7 +31,7 @@ export default function BottomNav({ profile }: { profile: Session | null }) {
   const username = user?.user.username;
   const userPath = username ? `/dashboard/${username}` : "/dashboard";
   return (
-    <div className="fixed bottom-0 isolate z-10 h-[50px] w-full border-t border-[rgba(219,219,219,0.27)] bg-black md:hidden">
+    <div className="fixed bottom-0 isolate z-[100] h-[50px] w-full border-t border-[rgba(219,219,219,0.27)] bg-black md:hidden  ">
       <div className="[&_a]:mob_nav_bottom flex h-full w-full items-center justify-around text-white">
         {links.map((item, index) => {
           return (

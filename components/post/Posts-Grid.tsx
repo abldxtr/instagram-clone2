@@ -1,11 +1,15 @@
+// "use client";
+
 import { PostWithExtras } from "@/lib/definitions";
 import { HeartIcon, MessageCircle } from "lucide-react";
 import Image from "next/image";
 // import Link from "next/link";
 import NoPost from "./no-post";
 import { Link } from "../link";
+import useScrollRestoration from "@/hooks/use-ScrollRestoration";
 
 function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
+  // useScrollRestoration();
   if (posts?.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center space-y-3 max-w-3xl lg:max-w-4xl mx-auto pb-20">
@@ -19,6 +23,7 @@ function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
       {posts?.map((post) => (
         <Link
           href={`/dashboard/p/${post.id}`}
+          scroll={false}
           key={post.id}
           prefetch={true}
           className="relative flex items-center justify-center h-44 md:h-64 lg:h-80 group col-span-1"
