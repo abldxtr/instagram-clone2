@@ -18,6 +18,7 @@ function sleep(ms: number) {
 
 async function prefetchImages(href: string) {
   if (!href.startsWith("/") || href.startsWith("/order") || href === "/") {
+    console.log("not cache");
     return [];
   }
   const url = new URL(href, window.location.href);
@@ -57,9 +58,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
           prefetchTimeout = setTimeout(async () => {
             router.prefetch(String(props.href));
             await sleep(0); // We want the doc prefetches to happen first.
-            // void prefetchImages(String(props.href)).then((images) => {
-            //   setImages(images);
-            // }, console.error);
+            void prefetchImages(String(props.href)).then((images) => {
+              setImages(images);
+            }, console.error);
             // Stop observing once images are prefetched
             observer.unobserve(entry.target);
           }, 300); // 300ms delay
@@ -90,10 +91,10 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
         router.prefetch(String(props.href));
         if (preloading.length) return;
         const p: (() => void)[] = [];
-        // for (const image of images) {
-        //   const remove = prefetchImage(image);
-        //   if (remove) p.push(remove);
-        // }
+        for (const image of images) {
+          const remove = prefetchImage(image);
+          if (remove) p.push(remove);
+        }
         setPreloading(p);
       }}
       onMouseLeave={() => {

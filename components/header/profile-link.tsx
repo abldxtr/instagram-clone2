@@ -1,5 +1,6 @@
 // import { auth } from "@/auth";
 import { Session } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function ServerItemProfileLink({
@@ -19,10 +20,14 @@ export default async function ServerItemProfileLink({
       >
         <div className=" p-[12px] flex items-center w-full h-full relative ">
           {image ? (
-            <img
+            <Image
               src={image}
               alt="profile img"
               className="  rounded-full size-[24px] shrink-0  "
+              width={24}
+              height={24}
+              loading="eager"
+              decoding="sync"
             />
           ) : (
             <div className=" rounded-full size-[24px] shrink-0  bg-blue-200/60 " />

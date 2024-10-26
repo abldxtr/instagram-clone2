@@ -14,7 +14,7 @@ import {
   ProfilePicUpdateSchema,
 } from "./schemas";
 import db from "./prisma";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { getUserId } from "./utils";
 import { randomUUID, UUID } from "crypto";
@@ -59,7 +59,10 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
       // message: "Database Error: Failed to Create Post.",
     };
   }
+  revalidateTag("fetchPosts");
 
+  revalidateTag("fetchPostById");
+  revalidateTag("fetchPostsByUsername");
   revalidatePath(`/dashboard/${username}`);
   redirect(`/dashboard/${username}`);
 }
@@ -100,7 +103,10 @@ export async function UpdateProfilePic(
       error: "Database Error: Failed to Create Post.",
     };
   }
+  revalidateTag("fetchPosts");
 
+  revalidateTag("fetchPostById");
+  revalidateTag("fetchPostsByUsername");
   revalidatePath(`/dashboard/${username}`);
   redirect(`/dashboard/${username}`);
 }
@@ -192,6 +198,10 @@ export async function deletePost(formData: FormData) {
         id,
       },
     });
+    revalidateTag("fetchPosts");
+
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
     revalidatePath("/dashboard");
     return { message: "Deleted Post." };
   } catch (error) {
@@ -242,6 +252,10 @@ export async function likePost(value: FormDataEntryValue | null) {
           },
         },
       });
+      revalidateTag("fetchPosts");
+
+      revalidateTag("fetchPostById");
+      revalidateTag("fetchPostsByUsername");
       revalidatePath("/dashboard");
       return { message: "Unliked Post." };
     } catch (error) {
@@ -322,6 +336,10 @@ export async function bookmarkPost(value: FormDataEntryValue | null) {
         userId,
       },
     });
+    revalidateTag("fetchPosts");
+
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
     revalidatePath("/dashboard");
     return { message: "Bookmarked Post." };
   } catch (error) {
@@ -363,6 +381,10 @@ export async function createComment(values: z.infer<typeof CreateComment>) {
         userId,
       },
     });
+    revalidateTag("fetchPosts");
+
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
     revalidatePath("/dashboard");
     return { message: "Created Comment." };
   } catch (error) {
@@ -394,6 +416,10 @@ export async function deleteComment(formData: FormData) {
         id,
       },
     });
+    revalidateTag("fetchPosts");
+
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
     revalidatePath("/dashboard");
     return { message: "Deleted Comment." };
   } catch (error) {
@@ -439,6 +465,10 @@ export async function followUser(formData: FormData) {
           },
         },
       });
+      revalidateTag("fetchPosts");
+
+      revalidateTag("fetchPostById");
+      revalidateTag("fetchPostsByUsername");
       revalidatePath("/dashboard");
       return { message: "Unfollowed User." };
     } catch (error) {

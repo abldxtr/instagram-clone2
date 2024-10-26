@@ -1,6 +1,6 @@
 // "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { Icons } from "../Icons";
 import { Fragment } from "react";
 // import UploadImg from "../upload/uploadImg";
@@ -10,6 +10,7 @@ import ServerItemProfileLink from "./profile-link";
 import ServerItemLogOut from "./Nav-serverside";
 import CreateItem, { NavUpload } from "./create-item";
 import { auth } from "@/auth";
+import { Link } from "../link";
 
 const links = [
   { name: "Home", href: "/dashboard", icon: <Icons.home /> },
@@ -43,11 +44,7 @@ const links = [
   },
 ];
 
-export default function NavLeft({
-  profile,
-}: {
-  profile: Session | null;
-}) {
+export default function NavLeft({ profile }: { profile: Session | null }) {
   // const { openUpload, setOpenUpload } = useGlobalstate();
   const user = profile;
 
@@ -57,7 +54,7 @@ export default function NavLeft({
         className="fixed left-0 isolate z-10 h-[100vh] border-r border-[rgba(219,219,219,0.27)] bg-black 
      md:w-[72px] lg:w-[244px] hidden md:block pt-[20px] pb-[8px] px-[12px] "
       >
-        <div className="[&_div]:mob_nav_bottom flex h-full w-full flex-col items-start  text-white">
+        <div className="[&_div]:mob_nav_bottom flex h-full w-full flex-col items-start justify-between  text-white">
           {/* <!-- header logo --> */}
           <div className=" h-[92px] w-full  ">
             <Link
@@ -86,6 +83,7 @@ export default function NavLeft({
                 <Fragment key={index}>
                   {!!link ? (
                     <Link
+                      prefetch={true}
                       // key={index}
                       href={item?.href}
                       className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full"

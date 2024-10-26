@@ -25,7 +25,12 @@ function ProfileImg({
           )}
           onClick={() => isCurrentUser && setChangeProfileImg(true)}
         >
-          <AvatarImage src={image!} alt="@shadcn" />
+          <AvatarImage
+            src={image!}
+            alt="@shadcn"
+            loading="eager"
+            decoding="sync"
+          />
           <AvatarFallback className="text-black bg-blue-400">
             {username ?? ""}
           </AvatarFallback>
