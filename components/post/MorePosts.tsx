@@ -16,6 +16,7 @@ async function MorePosts({ postId }: { postId: string }) {
         <Link
           href={`/dashboard/${postUsername}`}
           className="text-[rgb(245,245,245)] hover:opacity-50"
+          prefetch={true}
         >
           {postUsername}
         </Link>{" "}

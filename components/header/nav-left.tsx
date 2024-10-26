@@ -112,7 +112,7 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
           <ServerItemLogOut user={user} />
         </div>
       </div>
-      <NavUpload />
+      <NavUpload profile={profile} />
       {/* {openUpload && <UploadImg profile={profile} />} */}
     </>
   );

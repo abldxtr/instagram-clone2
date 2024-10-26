@@ -52,6 +52,7 @@ async function SinglePost({ id }: { id: string }) {
             <Link
               className="font-semibold text-sm flex items-center space-x-2"
               href={`/dashboard/${postUsername}`}
+              prefetch={true}
             >
               <UserAvatar user={post.user} className="h-14 w-14" />
               <div>

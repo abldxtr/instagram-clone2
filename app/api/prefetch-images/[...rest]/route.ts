@@ -19,6 +19,8 @@ export async function GET(
 ) {
   const schema = process.env.NODE_ENV === "development" ? "http" : "https";
   const host = getHostname();
+  // const host = "fksxn3-3000.csb.app";
+
   console.log("host", host);
   if (!host) {
     return new Response("Failed to get hostname from env", { status: 500 });

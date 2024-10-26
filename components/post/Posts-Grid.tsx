@@ -32,6 +32,8 @@ function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
             src={post.fileUrl}
             fill
             alt="Post preview"
+            loading="eager"
+            decoding="sync"
             className="object-cover -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90"
           />
           <div className="opacity-0 group-hover:opacity-100 flex transition items-center justify-center space-x-6">
