@@ -6,7 +6,7 @@ import Image from "next/image";
 // import Link from "next/link";
 import NoPost from "./no-post";
 import { Link } from "../link";
-import useScrollRestoration from "@/hooks/use-ScrollRestoration";
+// import useScrollRestoration from "@/hooks/use-ScrollRestoration";
 
 function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
   // useScrollRestoration();
