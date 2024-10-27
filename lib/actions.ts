@@ -57,7 +57,8 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
     revalidateTag("fetchSavedPostsByUsername");
 
     revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
 
     // redirect(`/dashboard/${username}`);
@@ -109,7 +110,8 @@ export async function UpdateProfilePic(
     revalidateTag("fetchSavedPostsByUsername");
 
     revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return {
       success: "profile is changed",
@@ -216,7 +218,8 @@ export async function deletePost(formData: FormData) {
     revalidateTag("fetchSavedPostsByUsername");
 
     // revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return { message: "Deleted Post." };
   } catch (error) {
@@ -275,7 +278,8 @@ export async function likePost(value: FormDataEntryValue | null) {
       revalidateTag("fetchSavedPostsByUsername");
 
       // revalidatePath(`/dashboard/${username}`);
-      revalidatePath(`/dashboard/p/`);
+      revalidatePath("/dashboard/p/[id]", "page");
+
       revalidatePath(`/dashboard`);
       return { message: "Unliked Post." };
     } catch (error) {
@@ -348,7 +352,8 @@ export async function bookmarkPost(value: FormDataEntryValue | null) {
       revalidateTag("fetchSavedPostsByUsername");
 
       // revalidatePath(`/dashboard/${username}`);
-      revalidatePath(`/dashboard/p/`);
+      revalidatePath("/dashboard/p/[id]", "page");
+
       revalidatePath(`/dashboard`);
       return { message: "Unbookmarked Post." };
     } catch (error) {
@@ -373,7 +378,8 @@ export async function bookmarkPost(value: FormDataEntryValue | null) {
     revalidateTag("fetchSavedPostsByUsername");
 
     // revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return { message: "Bookmarked Post." };
   } catch (error) {
@@ -423,7 +429,8 @@ export async function createComment(values: z.infer<typeof CreateComment>) {
     revalidateTag("fetchSavedPostsByUsername");
 
     // revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return { message: "Created Comment." };
   } catch (error) {
@@ -463,7 +470,8 @@ export async function deleteComment(formData: FormData) {
     revalidateTag("fetchSavedPostsByUsername");
 
     // revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return { message: "Deleted Comment." };
   } catch (error) {
@@ -517,7 +525,9 @@ export async function followUser(formData: FormData) {
       revalidateTag("fetchSavedPostsByUsername");
 
       // revalidatePath(`/dashboard/${username}`);
-      revalidatePath(`/dashboard/p/`);
+      // revalidatePath("/dashboard/p/[id]", "page");
+
+      revalidatePath("/dashboard/p/[id]", "page");
       revalidatePath(`/dashboard`);
       return { message: "Unfollowed User." };
     } catch (error) {
@@ -542,7 +552,8 @@ export async function followUser(formData: FormData) {
     revalidateTag("fetchSavedPostsByUsername");
 
     // revalidatePath(`/dashboard/${username}`);
-    revalidatePath(`/dashboard/p/`);
+    revalidatePath("/dashboard/p/[id]", "page");
+
     revalidatePath(`/dashboard`);
     return { message: "Followed User." };
   } catch (error) {
