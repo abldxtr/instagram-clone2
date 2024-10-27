@@ -37,7 +37,7 @@ async function SinglePost({ id }: { id: string }) {
 
   return (
     <>
-      <Card className="max-w-3xl lg:max-w-4xl hidden md:flex mx-auto bg-black !border-[0px] !rounded-[0px] mt-8   ">
+      <Card className="max-w-3xl lg:max-w-4xl hidden md:flex mx-auto bg-black !border-[0px] !rounded-[0px] mt-8 !max-h-[450px]  ">
         <div className="relative overflow-hidden h-[450px] max-w-sm lg:max-w-lg w-full">
           <Image
             src={post.fileUrl}
@@ -78,7 +78,7 @@ async function SinglePost({ id }: { id: string }) {
           )}
 
           {post.comments.length > 0 && (
-            <ScrollArea className="hidden md:inline py-1.5 flex-1">
+            <ScrollArea className="hidden md:inline py-1.5 flex-1   ">
               <MiniPost post={post} />
               {post.comments.map((comment) => (
                 <Comment key={comment.id} comment={comment} />
