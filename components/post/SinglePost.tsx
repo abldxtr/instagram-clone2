@@ -38,6 +38,7 @@ async function SinglePost({ id }: { id: string }) {
   return (
     <>
       <Card className="max-w-3xl lg:max-w-4xl hidden md:flex mx-auto bg-black !border-[0px] !rounded-[0px] mt-8 !max-h-[450px]  ">
+        {/* kkkk */}
         <div className="relative overflow-hidden h-[450px] max-w-sm lg:max-w-lg w-full">
           <Image
             src={post.fileUrl}
