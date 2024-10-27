@@ -10,7 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { PostWithExtras } from "@/lib/definitions";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import PostActions from "./post/post-actions";
@@ -18,6 +18,7 @@ import MiniPost from "./post/MiniPost";
 import UserAvatar from "./profile/UserAvatar";
 import Comment from "./post/Comment";
 import CommentForm from "./post/CommentForm";
+import { Link } from "./link";
 
 function PostView({ id, post }: { id: string; post: PostWithExtras }) {
   const pathname = usePathname();

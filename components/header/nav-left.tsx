@@ -58,7 +58,7 @@ export default function NavLeft({ profile }: { profile: Session | null }) {
           {/* <!-- header logo --> */}
           <div className=" h-[92px] w-full  ">
             <Link
-              href="/"
+              href="/dashboard"
               className=" my-[4px] hover:bg-white/10 rounded-[8px] w-full lg:hidden block"
             >
               <div className=" p-[12px] flex items-center w-full h-full ">

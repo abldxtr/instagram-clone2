@@ -33,8 +33,15 @@ export async function GET(
   if (!href) {
     return new Response("Missing url parameter", { status: 400 });
   }
+
   const url = `${schema}://${host}/${href}`;
   console.log("url", url);
+
+  // for disable prefetch
+
+  // if (url) {
+  //   return;
+  // }
 
   const response = await fetch(url);
   if (!response.ok) {

@@ -17,9 +17,9 @@ function sleep(ms: number) {
 }
 
 async function prefetchImages(href: string) {
-  // if (!href.startsWith("/") || href.startsWith("/order") || href === "/") {
-  //   return [];
-  // }
+  if (!href.startsWith("/")) {
+    return [];
+  }
   const url = new URL(href, window.location.href);
   const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
     priority: "low",
