@@ -52,7 +52,14 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
     revalidateTag("fetchPosts");
     revalidateTag("fetchPostById");
     revalidateTag("fetchPostsByUsername");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
     revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
+
     // redirect(`/dashboard/${username}`);
     return {
       success: "the post is created",
@@ -64,12 +71,6 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
       // message: "Database Error: Failed to Create Post.",
     };
   }
-  revalidateTag("fetchPosts");
-
-  revalidateTag("fetchPostById");
-  revalidateTag("fetchPostsByUsername");
-  revalidatePath(`/dashboard/${username}`);
-  redirect(`/dashboard/${username}`);
 }
 
 export async function UpdateProfilePic(
@@ -100,6 +101,16 @@ export async function UpdateProfilePic(
         });
       }
     }
+    revalidateTag("fetchPosts");
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return {
       success: "profile is changed",
     };
@@ -108,12 +119,6 @@ export async function UpdateProfilePic(
       error: "Database Error: Failed to Create Post.",
     };
   }
-  revalidateTag("fetchPosts");
-
-  revalidateTag("fetchPostById");
-  revalidateTag("fetchPostsByUsername");
-  revalidatePath(`/dashboard/${username}`);
-  redirect(`/dashboard/${username}`);
 }
 
 cloudinary.config({
@@ -204,10 +209,15 @@ export async function deletePost(formData: FormData) {
       },
     });
     revalidateTag("fetchPosts");
-
     revalidateTag("fetchPostById");
     revalidateTag("fetchPostsByUsername");
-    revalidatePath("/dashboard");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    // revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return { message: "Deleted Post." };
   } catch (error) {
     return { message: "Database Error: Failed to Delete Post." };
@@ -258,10 +268,15 @@ export async function likePost(value: FormDataEntryValue | null) {
         },
       });
       revalidateTag("fetchPosts");
-
       revalidateTag("fetchPostById");
       revalidateTag("fetchPostsByUsername");
-      revalidatePath("/dashboard");
+      revalidateTag("fetchProfile");
+      revalidateTag("fetchProfileByEmail");
+      revalidateTag("fetchSavedPostsByUsername");
+
+      // revalidatePath(`/dashboard/${username}`);
+      revalidatePath(`/dashboard/p/`);
+      revalidatePath(`/dashboard`);
       return { message: "Unliked Post." };
     } catch (error) {
       return { message: "Database Error: Failed to Unlike Post." };
@@ -325,7 +340,16 @@ export async function bookmarkPost(value: FormDataEntryValue | null) {
           },
         },
       });
-      revalidatePath("/dashboard");
+      revalidateTag("fetchPosts");
+      revalidateTag("fetchPostById");
+      revalidateTag("fetchPostsByUsername");
+      revalidateTag("fetchProfile");
+      revalidateTag("fetchProfileByEmail");
+      revalidateTag("fetchSavedPostsByUsername");
+
+      // revalidatePath(`/dashboard/${username}`);
+      revalidatePath(`/dashboard/p/`);
+      revalidatePath(`/dashboard`);
       return { message: "Unbookmarked Post." };
     } catch (error) {
       return {
@@ -342,10 +366,15 @@ export async function bookmarkPost(value: FormDataEntryValue | null) {
       },
     });
     revalidateTag("fetchPosts");
-
     revalidateTag("fetchPostById");
     revalidateTag("fetchPostsByUsername");
-    revalidatePath("/dashboard");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    // revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return { message: "Bookmarked Post." };
   } catch (error) {
     return {
@@ -387,10 +416,15 @@ export async function createComment(values: z.infer<typeof CreateComment>) {
       },
     });
     revalidateTag("fetchPosts");
-
     revalidateTag("fetchPostById");
     revalidateTag("fetchPostsByUsername");
-    revalidatePath("/dashboard");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    // revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return { message: "Created Comment." };
   } catch (error) {
     return { message: "Database Error: Failed to Create Comment." };
@@ -422,10 +456,15 @@ export async function deleteComment(formData: FormData) {
       },
     });
     revalidateTag("fetchPosts");
-
     revalidateTag("fetchPostById");
     revalidateTag("fetchPostsByUsername");
-    revalidatePath("/dashboard");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    // revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return { message: "Deleted Comment." };
   } catch (error) {
     return { message: "Database Error: Failed to Delete Comment." };
@@ -471,10 +510,15 @@ export async function followUser(formData: FormData) {
         },
       });
       revalidateTag("fetchPosts");
-
       revalidateTag("fetchPostById");
       revalidateTag("fetchPostsByUsername");
-      revalidatePath("/dashboard");
+      revalidateTag("fetchProfile");
+      revalidateTag("fetchProfileByEmail");
+      revalidateTag("fetchSavedPostsByUsername");
+
+      // revalidatePath(`/dashboard/${username}`);
+      revalidatePath(`/dashboard/p/`);
+      revalidatePath(`/dashboard`);
       return { message: "Unfollowed User." };
     } catch (error) {
       return {
@@ -490,7 +534,16 @@ export async function followUser(formData: FormData) {
         followingId: id,
       },
     });
-    revalidatePath("/dashboard");
+    revalidateTag("fetchPosts");
+    revalidateTag("fetchPostById");
+    revalidateTag("fetchPostsByUsername");
+    revalidateTag("fetchProfile");
+    revalidateTag("fetchProfileByEmail");
+    revalidateTag("fetchSavedPostsByUsername");
+
+    // revalidatePath(`/dashboard/${username}`);
+    revalidatePath(`/dashboard/p/`);
+    revalidatePath(`/dashboard`);
     return { message: "Followed User." };
   } catch (error) {
     return {
